@@ -1,0 +1,83 @@
+# Stakeholders for DuVine Cycling + Adventure Co.
+# Source: synthesis of /company overview (gong brief).md and /Duvine Deal Review (Evan brief).md
+# Last updated: 2026-06-17 by @presailor
+# See /prospect-context.md for full notes per stakeholder.
+
+stakeholders:
+  # DuVine
+  - name: Deena Giancotti
+    title: Decision maker / budget holder
+    company: DuVine
+    role: economic-buyer
+    email: deena@duvine.com
+    status: dark to Sanity ~2 months
+    notes: Risk-averse post-Kaptio; CAPEX preference; reach via Gwen + Luke
+
+  - name: Gwen Kidera
+    title: Creative Director / Photographer
+    company: DuVine
+    role: influencer
+    email: gwen@duvine.com
+    status: actively evaluating; ran Sanity-vs-Contentful comparison
+    notes: Most accessible DuVine contact; prioritize over Deena
+
+  - name: Mia
+    title: unknown
+    company: DuVine
+    role: end-user
+    email: mia@duvine.com
+    status: attended March demos; no further signal
+
+  # Therefore Interactive (implementation agency)
+  - name: Luke Bowler
+    title: Head of Client Services & Growth
+    company: Therefore Interactive
+    role: champion
+    email: luke@therefore.ca
+    status: highly engaged; primary advocate for Sanity
+    notes: Direct line to Deena and Gwen; won't build unpaid POC
+
+  - name: David Malinowicz
+    title: unknown
+    company: Therefore Interactive
+    role: influencer
+    email: david@therefore.ca
+
+  - name: Pierre Marcel
+    title: Technical / dev lead
+    company: Therefore Interactive
+    role: technical-evaluator
+    email: pierre@therefore.ca
+
+  - name: Alex De Winne
+    title: unknown
+    company: Therefore Interactive
+    role: influencer
+
+  # External influencer
+  - name: Ted Martens
+    title: Contact at Natural Habitat Adventures
+    company: NatHab (Lindblad sister brand)
+    role: blocker
+    linkedin: tedmartens1
+    notes: Contentful advocate; influencing Deena via NatHab 2023 precedent
+
+  # Sanity
+  - name: Stephen Burd
+    title: Account Executive
+    company: Sanity
+    role: ae
+    email: stephen.burd@sanity.io
+    status: handing off to next AE
+
+  - name: Nancy Du
+    title: Solution Engineer
+    company: Sanity
+    role: se
+    email: nancy.du@sanity.io
+
+  - name: Evan Howe
+    title: Regional Sales Director
+    company: Sanity
+    role: rsd
+    email: evan.howe@sanity.io
