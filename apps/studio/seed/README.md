@@ -1,0 +1,18 @@
+# Studio seed
+
+This folder has the M1 demo seed for the DuVine Studio:
+
+- 1 tour: Colnago Tuscany Bike Tour
+- 3 bikes
+- 1 Centaur-style departure schedule with 4 departures
+
+Run from the repo root:
+
+```sh
+pnpm seed:studio
+pnpm seed:studio:check
+```
+
+The import uses fixed document IDs and `--replace`, so it is safe to rerun when you want to reset the demo content.
+
+Images are not included. After import, add the tour hero, six itinerary images, and three bike photos in Studio.

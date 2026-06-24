@@ -26,6 +26,8 @@
     "format": "turbo run format",
     "format:check": "turbo run format:check",
     "check-types": "turbo run check-types",
+    "seed:studio": "pnpm --filter studio seed",
+    "seed:studio:check": "pnpm --filter studio seed:check",
     "test:e2e": "turbo run test:e2e"
   },
   "pnpm": {

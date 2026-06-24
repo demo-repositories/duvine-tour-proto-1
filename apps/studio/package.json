@@ -16,7 +16,9 @@
     "deploy-graphql": "sanity graphql deploy",
     "extract": "sanity schema extract",
     "check-types": "tsc --noEmit",
-    "type": "sanity typegen generate"
+    "type": "sanity typegen generate",
+    "seed": "node ./seed/import-seed.mjs",
+    "seed:check": "node ./seed/check-seed.mjs"
   },
   "keywords": [
     "sanity"
