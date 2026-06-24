@@ -59,5 +59,5 @@ pnpm --filter studio build
 ## Notes
 
 - Do not commit `.env`, `.env.local`, or token values.
-- `SANITY_STUDIO_APP_ID` is `gv1qmwsq`.
+- `SANITY_STUDIO_APP_ID` is `pi3k2gs31ap8kre2gjok6cvq`.
 - M2 will handle the front end, tour page rendering, Visual Editing, and polished seed content.

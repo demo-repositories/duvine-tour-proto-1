@@ -57,7 +57,7 @@ Everything needed to go from zero to a working Sanity Studio + Next.js front-end
 |---|---|
 | Starter | `github.com/robotostudio/turbo-start-sanity` (pnpm Turborepo, Next.js + Sanity, Visual Editing wired) |
 | Sanity org | `o6LGneXO1` (Allan's) |
-| Sanity Studio app ID | `gv1qmwsq` |
+| Sanity Studio app ID | `pi3k2gs31ap8kre2gjok6cvq` |
 | Target repo | `demo-repositories/duvine-tour-proto-1` |
 | Demo page | `https://www.duvine.com/tour/colnago-tuscany-bike-tour/` |
 | Schema | Six types: `tour`, `bike`, `departureSchedule` (documents); `itineraryDay`, `highlightBlock`, `detailSection` (objects) |

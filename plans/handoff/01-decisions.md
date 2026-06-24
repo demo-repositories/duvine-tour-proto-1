@@ -8,7 +8,7 @@ Don't reopen these without checking with @allanwhite.
 |---|---|---|
 | 1 | Starter template | `github.com/robotostudio/turbo-start-sanity` (Roboto Studio's Turborepo Next.js + Sanity starter). pnpm. |
 | 2 | Sanity org | `o6LGneXO1` |
-| 3 | Sanity Studio app ID | `gv1qmwsq` |
+| 3 | Sanity Studio app ID | `pi3k2gs31ap8kre2gjok6cvq` |
 | 4 | Target repo | `demo-repositories/duvine-tour-proto-1` |
 | 5 | Tour to demo | Colnago Tuscany Bike Tour (`duvine.com/tour/colnago-tuscany-bike-tour/`) |
 | 6 | Bikes | Separate `bike` documents, referenced from tour |
