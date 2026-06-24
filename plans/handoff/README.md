@@ -27,6 +27,7 @@ Everything needed to go from zero to a working Sanity Studio + Next.js front-end
 
 - `/specs/duvine-demo-build-brief.md` — the spec from @presailor (read this first)
 - `/specs/duvine-demo-schema.md` — the schema spec @presailor wrote (the source of truth for the TypeScript files)
+- `/specs/duvine-tour-schema-spec-claude.md` — alternative reference-forward model. Use for optional ideas only; do not replace the handoff schema with it.
 
 ### Runbooks (sequential)
 

@@ -37,6 +37,26 @@ These were left to the builder. My picks below — escalate only if they break s
 | Image handling | Hotspot on every image. Alt required at field level (not just options). Caption + credit optional but visible. | DuVine treats photography as content; the schema should too. |
 | GROQ projection strategy | One query, dereferences bikes and departureSchedule inline. Slug-based fetch. | Avoid client-side waterfalls; one fetch per page render. |
 | Component library | Tailwind + Shadcn (whatever the starter ships). Don't introduce new UI libs. | Stay close to the starter; ship faster. |
+| Alternative Claude schema | Treat `plans/specs/duvine-tour-schema-spec-claude.md` as reference only. Do not replace the handoff schema with it. | It is more production-complete, but less intuitive for a fast Studio demo. The demo needs a small model that Gwen and Mia can understand quickly. |
+
+## Hybrid content-model guidance
+
+The Claude schema has good production instincts, but the first build should stay smaller.
+
+**Borrow if time allows:**
+
+- Add a `gallery` field on `tour` if the page needs more visual depth.
+- Derive the displayed starting price from `departureSchedule.departures`.
+- Store distance and elevation once, then derive alternate units in the front end.
+- Add a lightweight bike relationship object only if tour-specific bike notes become important.
+
+**Do not add for the first build:**
+
+- `destination`, `level`, `collection`, or `accommodation` documents.
+- Standalone editable `departure` documents.
+- Weather inheritance, breadcrumb traversal, or collection/level page logic.
+
+The Studio should stay organized around the editor's task: build and publish one tour page. Keep the top-level desk simple: Tours, Bikes, and Departure schedules from Centaur.
 
 ## Open questions for @allanwhite (still open)
 
