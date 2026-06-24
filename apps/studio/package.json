@@ -5,7 +5,8 @@
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "sanity dev",
+    "dev": "CHOKIDAR_USEPOLLING=true CHOKIDAR_INTERVAL=1000 sanity dev --host=127.0.0.1 --port=3333",
+    "dev:native": "sanity dev --host=127.0.0.1 --port=3333",
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",

@@ -1,13 +1,24 @@
 import "@workspace/env/client";
 import "@workspace/env/server";
 
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
 import { env } from "@workspace/env/client";
 import { client } from "@workspace/sanity/client";
 import { queryRedirects } from "@workspace/sanity/query";
 import type { NextConfig } from "next";
 import { sanity } from "next-sanity/live/cache-life";
 
+const workspaceRoot = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../.."
+);
+
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: workspaceRoot,
+  },
   transpilePackages: ["@workspace/ui"],
   reactCompiler: true,
   cacheComponents: true,

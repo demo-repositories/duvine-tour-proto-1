@@ -29,14 +29,25 @@ Install dependencies:
 pnpm install
 ```
 
-Run the Studio:
+Run both Studio and frontend:
 
 ```sh
-cd apps/studio
-CHOKIDAR_USEPOLLING=true CHOKIDAR_INTERVAL=1000 pnpm sanity dev --host=127.0.0.1 --port=3333
+pnpm dev
 ```
 
-Then open `http://127.0.0.1:3333`.
+Run only the Studio:
+
+```sh
+pnpm dev:studio
+```
+
+Run only the frontend:
+
+```sh
+pnpm dev:web
+```
+
+Studio runs at `http://127.0.0.1:3333`. The frontend runs at `http://localhost:3000`.
 
 ## Checks
 
