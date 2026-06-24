@@ -64,10 +64,17 @@ Deploy the Studio with the root script:
 pnpm deploy:studio
 ```
 
+Hosted Studio URL:
+
+```txt
+https://cycling-adventures.sanity.studio/
+```
+
 Use `deploy:studio`, not `pnpm --filter studio deploy`. `deploy` is also a pnpm command, so the filtered version can call pnpm's own deploy command instead of Sanity's deploy script.
 
 ## Notes
 
 - Do not commit `.env`, `.env.local`, or token values.
-- `SANITY_STUDIO_APP_ID` is `pi3k2gs31ap8kre2gjok6cvq`.
+- Sanity project ID is `gv1qmwsq`.
+- `SANITY_STUDIO_APP_ID` is `w8eukkpemdxi0shwkzu9dnof`.
 - M2 will handle the front end, tour page rendering, Visual Editing, and polished seed content.
