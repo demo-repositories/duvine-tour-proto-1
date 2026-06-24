@@ -56,6 +56,16 @@ pnpm --filter studio check-types
 pnpm --filter studio build
 ```
 
+## Studio deploy
+
+Deploy the Studio with the root script:
+
+```sh
+pnpm deploy:studio
+```
+
+Use `deploy:studio`, not `pnpm --filter studio deploy`. `deploy` is also a pnpm command, so the filtered version can call pnpm's own deploy command instead of Sanity's deploy script.
+
 ## Notes
 
 - Do not commit `.env`, `.env.local`, or token values.
