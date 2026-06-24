@@ -15,7 +15,9 @@
 
 ### 1. Deploy the Studio
 
-This requires running `sanity deploy` interactively the first time (can't be automated in CI for the initial Studio app creation).
+The Studio app ID is already known: `gv1qmwsq`. Use that value for `SANITY_STUDIO_APP_ID`. Do not create a second Studio app unless Allan asks for a new one.
+
+Run the Studio deploy from `apps/studio`:
 
 ```bash
 cd apps/studio
@@ -24,7 +26,7 @@ pnpm sanity deploy
 
 When prompted for a Studio hostname, pick something readable: `duvine-tour-proto` → `https://duvine-tour-proto.sanity.studio`.
 
-Note the **SANITY_STUDIO_APP_ID** that gets written to your environment — needed for CI deploys later.
+For CI or GitHub secrets, set **SANITY_STUDIO_APP_ID** to `gv1qmwsq`.
 
 ### 2. Set up Vercel for the front-end
 

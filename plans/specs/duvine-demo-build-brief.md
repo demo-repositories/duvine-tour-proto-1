@@ -28,6 +28,7 @@ The following decisions are made. Don't reopen them without checking with @allan
 |---|---|
 | Starter template | `https://github.com/robotostudio/turbo-start-sanity` (Roboto Studio's Turborepo Next.js + Sanity starter). pnpm monorepo. Visual Editing + Presentation tool already wired. |
 | Sanity org | `o6LGneXO1` (Allan's org — `https://www.sanity.io/organizations/o6LGneXO1`) |
+| Sanity Studio app ID | `gv1qmwsq` |
 | GitHub repo | `demo-repositories/duvine-tour-proto-1` |
 | Page to demo | The Colnago Tuscany Bike Tour: `https://www.duvine.com/tour/colnago-tuscany-bike-tour/` |
 | Schema spec | `/specs/duvine-demo-schema.md` on this channel — full field-by-field definition |
@@ -94,7 +95,7 @@ Visual Editing wiring should mostly come along from the starter. Verify it works
 - Seed the starter's homepage, navbar, footer with DuVine-flavored stub content. Doesn't need to be exhaustive.
 
 **Phase 5 — Deploy + dry-run (~1 hour).** Per the starter:
-- Run `npx sanity deploy` locally once from `apps/studio` to register the Studio app and get a `SANITY_STUDIO_APP_ID` — this can't be done by CI non-interactively.
+- Run `npx sanity deploy` locally once from `apps/studio` and use the existing `SANITY_STUDIO_APP_ID` value `gv1qmwsq`.
 - Add required secrets to GitHub: `SANITY_DEPLOY_TOKEN`, `SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, `SANITY_STUDIO_TITLE`, `SANITY_STUDIO_PRESENTATION_URL`, `SANITY_STUDIO_APP_ID`.
 - Deploy the front-end to Vercel (link the repo, set root to `apps/web`, configure env vars). If Vercel access isn't set up, sandbox tunnel via `miriad__sandbox_tunnel` is a viable fallback for demo day — but Vercel is more reliable and the URL is stable.
 - Configure CORS in Sanity Manage: production URL + custom domain + `http://localhost:3000` with "Allow credentials" on (needed for live preview / Visual Editing).

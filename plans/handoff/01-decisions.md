@@ -8,21 +8,22 @@ Don't reopen these without checking with @allanwhite.
 |---|---|---|
 | 1 | Starter template | `github.com/robotostudio/turbo-start-sanity` (Roboto Studio's Turborepo Next.js + Sanity starter). pnpm. |
 | 2 | Sanity org | `o6LGneXO1` |
-| 3 | Target repo | `demo-repositories/duvine-tour-proto-1` |
-| 4 | Tour to demo | Colnago Tuscany Bike Tour (`duvine.com/tour/colnago-tuscany-bike-tour/`) |
-| 5 | Bikes | Separate `bike` documents, referenced from tour |
-| 6 | Itinerary days | Inline array of objects on tour document, not separate document type |
-| 7 | Highlights / Eat / Drink | Polymorphic `highlightBlock` with category enum |
-| 8 | Inclusions + Details | Flexible `detailSection[]` array |
-| 9 | Dates and availability | External-system stub (`departureSchedule`), read-only in Studio, labeled "Source: Centaur" |
-| 10 | Region modeling | Skip for demo |
-| 11 | Localization | Skip for demo |
-| 12 | Business logic to showcase | Cross-field validator, reference filter, conditional visibility, async featured cap |
-| 13 | Pricing currency | USD only for demo |
-| 14 | `itineraryDay.accommodation` | Free text for demo (production would reference Property doc) |
-| 15 | Page builder on tour | Skip — tour is purely structured |
-| 16 | Bike difficulty filter | Separate `suitableForDifficulty[]` field on bike (needed for picker filter) |
-| 17 | Starter's other docs (homepage etc.) | Seed with light DuVine-flavored content; don't delete the starter's `page` doc |
+| 3 | Sanity Studio app ID | `gv1qmwsq` |
+| 4 | Target repo | `demo-repositories/duvine-tour-proto-1` |
+| 5 | Tour to demo | Colnago Tuscany Bike Tour (`duvine.com/tour/colnago-tuscany-bike-tour/`) |
+| 6 | Bikes | Separate `bike` documents, referenced from tour |
+| 7 | Itinerary days | Inline array of objects on tour document, not separate document type |
+| 8 | Highlights / Eat / Drink | Polymorphic `highlightBlock` with category enum |
+| 9 | Inclusions + Details | Flexible `detailSection[]` array |
+| 10 | Dates and availability | External-system stub (`departureSchedule`), read-only in Studio, labeled "Source: Centaur" |
+| 11 | Region modeling | Skip for demo |
+| 12 | Localization | Skip for demo |
+| 13 | Business logic to showcase | Cross-field validator, reference filter, conditional visibility, async featured cap |
+| 14 | Pricing currency | USD only for demo |
+| 15 | `itineraryDay.accommodation` | Free text for demo (production would reference Property doc) |
+| 16 | Page builder on tour | Skip — tour is purely structured |
+| 17 | Bike difficulty filter | Separate `suitableForDifficulty[]` field on bike (needed for picker filter) |
+| 18 | Starter's other docs (homepage etc.) | Seed with light DuVine-flavored content; don't delete the starter's `page` doc |
 
 ## Open questions answered (calls I made)
 
