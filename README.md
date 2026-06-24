@@ -47,7 +47,7 @@ Run only the frontend:
 pnpm dev:web
 ```
 
-Studio runs at `http://127.0.0.1:3333`. The frontend runs at `http://localhost:3000`.
+Studio runs at `http://localhost:3333`. The frontend runs at `http://localhost:3000`.
 
 ## Checks
 

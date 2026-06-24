@@ -1,10 +1,10 @@
 import type { FilterByType, Get } from "@sanity/codegen";
+import type { SanityImageData } from "@workspace/sanity/image";
 import type {
   QueryBlogIndexPageBlogsResult,
   QueryBlogSlugPageDataResult,
   QueryGlobalSeoSettingsResult,
   QueryHomePageDataResult,
-  QueryImageTypeResult,
   QueryNavbarDataResult,
 } from "@workspace/sanity/types";
 
@@ -23,7 +23,7 @@ export type PagebuilderType<T extends PageBuilderBlockTypes> = FilterByType<
 
 export type SanityButtonProps = Get<PagebuilderType<"hero">, "buttons", number>;
 
-export type SanityImageProps = NonNullable<QueryImageTypeResult>;
+export type SanityImageProps = SanityImageData;
 
 export type SanityRichTextProps = Get<QueryBlogSlugPageDataResult, "richText">;
 

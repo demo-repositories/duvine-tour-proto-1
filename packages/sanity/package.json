@@ -13,8 +13,9 @@
     "@sanity/asset-utils": "^2.3.0",
     "@sanity/client": "catalog:",
     "@sanity/image-url": "^2.1.1",
+    "@sanity/types": "6.2.0",
     "@workspace/env": "workspace:*",
-    "next-sanity": "13.0.7",
+    "next-sanity": "13.1.1",
     "react-is": "catalog:",
     "sanity-image": "^1.1.0"
   },

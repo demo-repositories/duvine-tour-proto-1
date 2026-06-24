@@ -1,10 +1,6 @@
 import { env } from "@workspace/env/client";
 import type { WrapperProps } from "sanity-image";
 
-import type { QueryImageTypeResult } from "./sanity.types";
-
-type SanityImageData = NonNullable<QueryImageTypeResult>;
-
 // Types
 type ImageHotspot = {
   readonly x: number;
@@ -16,6 +12,14 @@ type ImageCrop = {
   readonly bottom: number;
   readonly left: number;
   readonly right: number;
+};
+
+export type SanityImageData = {
+  readonly id?: string | null;
+  readonly alt?: string | null;
+  readonly preview?: string | null;
+  readonly hotspot?: ImageHotspot | null;
+  readonly crop?: ImageCrop | null;
 };
 
 type ProcessedImageData = {
@@ -102,7 +106,10 @@ export function processImageData(
 
   return {
     id: image.id,
-    alt: image.alt,
+    alt:
+      typeof image.alt === "string" && image.alt.length > 0
+        ? image.alt
+        : "Untitled image",
     ...(preview && { preview }),
     ...(hotspot && { hotspot }),
     ...(crop && { crop }),

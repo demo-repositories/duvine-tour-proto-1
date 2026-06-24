@@ -4,7 +4,6 @@ import { defineConfig } from "sanity";
 import { presentationTool } from "sanity/presentation";
 import { structureTool } from "sanity/structure";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
-import { lucideIconPicker } from "sanity-plugin-lucide-icon-picker";
 import { media } from "sanity-plugin-media";
 
 import { Logo } from "@/components/logo";
@@ -45,7 +44,6 @@ export default defineConfig({
     }),
     presentationUrl(),
     visionTool(),
-    lucideIconPicker(),
     unsplashImageAsset(),
     media(),
     assist(),
@@ -63,24 +61,5 @@ export default defineConfig({
   },
   schema: {
     types: schemaTypes,
-    templates: [
-      {
-        id: "nested-page-template",
-        title: "Nested Page",
-        schemaType: "page",
-        value: (props: { slug?: string; title?: string }) => ({
-          ...(props.slug
-            ? { slug: { current: props.slug, _type: "slug" } }
-            : {}),
-          ...(props.title ? { title: props.title } : {}),
-        }),
-        parameters: [
-          {
-            name: "slug",
-            type: "string",
-          },
-        ],
-      },
-    ],
   },
 });
