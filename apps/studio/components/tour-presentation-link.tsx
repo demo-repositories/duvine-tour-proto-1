@@ -2,15 +2,13 @@ import { EarthGlobeIcon } from "@sanity/icons";
 import { Button, Card, Flex, Stack, Text, useToast } from "@sanity/ui";
 import type { HTMLAttributes } from "react";
 import { useCallback, useMemo } from "react";
-import {
-  getPublishedId,
-  type SanityDocument,
-  type SlugValue,
-  useFormValue,
-} from "sanity";
+import { type SanityDocument, type SlugValue, useFormValue } from "sanity";
 import { useRouter } from "sanity/router";
 
-import { getPresentationPreviewPath } from "@/utils/presentation-preview";
+import {
+  getPresentationPreviewPath,
+  getPresentationToolPath,
+} from "@/utils/presentation-preview";
 
 type TourPreviewInputProps = {
   elementProps: HTMLAttributes<HTMLDivElement>;
@@ -27,15 +25,18 @@ export function TourPresentationLinkInput({
   const router = useRouter();
   const toast = useToast();
   const slug = document?.slug?.current;
-  const documentId = document?._id ? getPublishedId(document._id) : undefined;
 
   const previewPath = useMemo(
     () => getPresentationPreviewPath({ documentType: "tour", slug }),
     [slug]
   );
+  const presentationPath = useMemo(
+    () => getPresentationToolPath(previewPath),
+    [previewPath]
+  );
 
   const handleOpen = useCallback(() => {
-    if (!(documentId && previewPath)) {
+    if (!presentationPath) {
       toast.push({
         status: "error",
         title: "Add a slug first",
@@ -45,14 +46,10 @@ export function TourPresentationLinkInput({
       return;
     }
 
-    router.navigateIntent("edit", {
-      id: documentId,
-      mode: "presentation",
-      presentation: "presentation",
-      preview: previewPath,
-      type: "tour",
+    router.navigateUrl({
+      path: presentationPath,
     });
-  }, [documentId, previewPath, router, toast]);
+  }, [presentationPath, router, toast]);
 
   return (
     <div {...elementProps}>
@@ -67,7 +64,7 @@ export function TourPresentationLinkInput({
             </Text>
           </Stack>
           <Button
-            disabled={!(documentId && previewPath)}
+            disabled={!presentationPath}
             icon={EarthGlobeIcon}
             mode="default"
             onClick={handleOpen}

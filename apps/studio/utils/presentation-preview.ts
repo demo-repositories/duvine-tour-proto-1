@@ -28,3 +28,11 @@ export function getPresentationPreviewPath({
 
   return slugValue.startsWith("/") ? slugValue : `/${cleanSlug}`;
 }
+
+export function getPresentationToolPath(previewPath?: string) {
+  if (!previewPath) {
+    return;
+  }
+
+  return `/presentation?preview=${encodeURIComponent(previewPath)}`;
+}

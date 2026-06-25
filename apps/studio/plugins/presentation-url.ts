@@ -11,7 +11,10 @@ import {
 } from "sanity";
 import { useRouter } from "sanity/router";
 
-import { getPresentationPreviewPath } from "@/utils/presentation-preview";
+import {
+  getPresentationPreviewPath,
+  getPresentationToolPath,
+} from "@/utils/presentation-preview";
 
 interface PresentationUrlAction {
   documentId: string;
@@ -43,8 +46,9 @@ export const presentationUrl = definePlugin(() => ({
             documentType,
             slug,
           });
+          const presentationPath = getPresentationToolPath(previewPath);
           const handlePresentationOpen = useCallback(() => {
-            if (!previewPath) {
+            if (!presentationPath) {
               toast.push({
                 title: "No slug found",
                 status: "error",
@@ -52,20 +56,16 @@ export const presentationUrl = definePlugin(() => ({
               });
               return;
             }
-            router.navigateIntent("edit", {
-              id: publishedId,
-              mode: "presentation",
-              presentation: "presentation",
-              preview: previewPath,
-              type: documentType,
+            router.navigateUrl({
+              path: presentationPath,
             });
-          }, [documentType, previewPath, publishedId, toast, router]);
+          }, [presentationPath, toast, router]);
 
           return {
             type: "action" as const,
             icon: EarthGlobeIcon,
             hidden: documentId === "root",
-            disabled: !previewPath,
+            disabled: !presentationPath,
             renderAsButton: true,
             onAction: handlePresentationOpen,
             title: "Open in Presentation",
