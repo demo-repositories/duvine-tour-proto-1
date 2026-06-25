@@ -1,4 +1,30 @@
-import { defineLocations } from "sanity/presentation";
+import { defineDocuments, defineLocations } from "sanity/presentation";
+
+import { getPresentationPreviewPath } from "@/utils/presentation-preview";
+
+function getLocation({
+  documentType,
+  fallbackTitle,
+  slug,
+  title,
+}: {
+  documentType: string;
+  fallbackTitle: string;
+  slug?: string | null;
+  title?: string | null;
+}) {
+  const href = getPresentationPreviewPath({ documentType, slug });
+  if (!href) {
+    return [];
+  }
+
+  return [
+    {
+      title: title || fallbackTitle,
+      href,
+    },
+  ];
+}
 
 export const locations = {
   blog: defineLocations({
@@ -8,10 +34,12 @@ export const locations = {
     },
     resolve: (doc) => ({
       locations: [
-        {
-          title: doc?.title || "Untitled",
-          href: `${doc?.slug}`,
-        },
+        ...getLocation({
+          documentType: "blog",
+          fallbackTitle: "Untitled",
+          slug: doc?.slug,
+          title: doc?.title,
+        }),
         {
           title: "Blog",
           href: "/blog",
@@ -39,12 +67,12 @@ export const locations = {
       slug: "slug.current",
     },
     resolve: (doc) => ({
-      locations: [
-        {
-          title: doc?.title || "Untitled",
-          href: `${doc?.slug}`,
-        },
-      ],
+      locations: getLocation({
+        documentType: "page",
+        fallbackTitle: "Untitled",
+        slug: doc?.slug,
+        title: doc?.title,
+      }),
     }),
   }),
   tour: defineLocations({
@@ -53,14 +81,22 @@ export const locations = {
       slug: "slug.current",
     },
     resolve: (doc) => ({
-      locations: doc?.slug
-        ? [
-            {
-              title: doc?.title || "Untitled tour",
-              href: `/tour/${doc.slug}`,
-            },
-          ]
-        : [],
+      locations: getLocation({
+        documentType: "tour",
+        fallbackTitle: "Untitled tour",
+        slug: doc?.slug,
+        title: doc?.title,
+      }),
     }),
   }),
 };
+
+export const mainDocuments = defineDocuments([
+  {
+    route: "/tours/:slug",
+    resolve: ({ params }) => ({
+      filter: '_type == "tour" && slug.current == $slug',
+      params: { slug: params.slug },
+    }),
+  },
+]);

@@ -2,29 +2,29 @@ export function getPresentationPreviewPath({
   documentType,
   slug,
 }: {
-  documentType: string;
-  slug?: string;
+  documentType?: string;
+  slug?: string | { current?: string | null } | null;
 }) {
-  if (!slug) {
+  const slugValue = typeof slug === "string" ? slug : slug?.current;
+
+  if (!slugValue) {
     return;
   }
 
-  const cleanSlug = slug.replace(/^\/+/, "");
+  const cleanSlug = slugValue.replace(/^\/+/, "");
   if (!cleanSlug) {
     return;
   }
 
   if (documentType === "tour") {
-    return `/tour/${cleanSlug.replace(/^tour\//, "")}`;
+    return `/tours/${cleanSlug.replace(/^tours?\//, "")}`;
   }
 
-  return slug.startsWith("/") ? slug : `/${cleanSlug}`;
-}
-
-export function getPresentationToolPath(previewPath?: string) {
-  if (!previewPath) {
-    return;
+  if (documentType === "blog") {
+    return cleanSlug.startsWith("blog/")
+      ? `/${cleanSlug}`
+      : `/blog/${cleanSlug}`;
   }
 
-  return `/presentation?preview=${encodeURIComponent(previewPath)}`;
+  return slugValue.startsWith("/") ? slugValue : `/${cleanSlug}`;
 }

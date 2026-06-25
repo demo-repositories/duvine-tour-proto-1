@@ -303,6 +303,24 @@ export const queryBlogPaths = defineQuery(`
   *[_type == "blog" && defined(slug.current)].slug.current
 `);
 
+export const queryTourIndex = defineQuery(`
+  *[_type == "tour" && defined(slug.current) && privateOnly != true] | order(featured desc, title asc){
+    _id,
+    _type,
+    title,
+    subtitle,
+    "slug": slug.current,
+    heroImage {
+      ${imageFields},
+      caption,
+      credit
+    },
+    durationDays,
+    difficulty,
+    featured
+  }
+`);
+
 export const queryTourBySlug = defineQuery(`
   *[_type == "tour" && slug.current == $slug][0]{
     _id,
@@ -389,6 +407,10 @@ export const queryTourBySlug = defineQuery(`
 
 export const queryTourPaths = defineQuery(`
   *[_type == "tour" && defined(slug.current)].slug.current
+`);
+
+export const queryTourSlugExists = defineQuery(`
+  *[_type == "tour" && slug.current == $slug][0].slug.current
 `);
 
 const ogFieldsFragment = /* groq */ `

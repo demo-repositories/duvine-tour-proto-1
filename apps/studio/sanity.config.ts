@@ -7,7 +7,7 @@ import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 
 import { Logo } from "@/components/logo";
-import { locations } from "@/location";
+import { locations, mainDocuments } from "@/location";
 import { presentationUrl } from "@/plugins/presentation-url";
 import { schemaTypes } from "@/schemaTypes/index";
 import { structure } from "@/structure";
@@ -31,6 +31,7 @@ export default defineConfig({
     presentationTool({
       resolve: {
         locations,
+        mainDocuments,
       },
       previewUrl: {
         origin: getPresentationUrl(),

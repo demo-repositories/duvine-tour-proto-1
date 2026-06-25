@@ -12,6 +12,7 @@ import {
 } from "sanity";
 
 import { ValidationMessages } from "@/components/url-slug/validation-messages";
+import { getPresentationPreviewPath } from "@/utils/presentation-preview";
 import { generateSlugFromTitle } from "@/utils/slug-validation";
 
 const presentationOriginUrl = process.env.SANITY_STUDIO_PRESENTATION_URL;
@@ -50,9 +51,12 @@ export function PathnameFieldComponent(props: ObjectFieldProps<SlugValue>) {
     [validation]
   );
 
-  const localizedPathname = currentSlug.startsWith("/")
-    ? currentSlug
-    : `/${currentSlug}`;
+  const localizedPathname =
+    getPresentationPreviewPath({
+      documentType:
+        typeof document?._type === "string" ? document._type : undefined,
+      slug: currentSlug,
+    }) ?? (currentSlug.startsWith("/") ? currentSlug : `/${currentSlug}`);
   const fullUrl = `${presentationOriginUrl ?? ""}${localizedPathname}`;
 
   const handleChange = useCallback(

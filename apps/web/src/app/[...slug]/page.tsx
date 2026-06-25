@@ -6,9 +6,13 @@ import {
   sanityFetchMetadata,
   sanityFetchStaticParams,
 } from "@workspace/sanity/live";
-import { querySlugPageData, querySlugPagePaths } from "@workspace/sanity/query";
+import {
+  querySlugPageData,
+  querySlugPagePaths,
+  queryTourSlugExists,
+} from "@workspace/sanity/query";
 import { draftMode } from "next/headers";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 
 import { PageBuilder } from "@/components/pagebuilder";
@@ -90,6 +94,14 @@ export default async function SlugPage({
     stega: false,
   });
   if (!pageData) {
+    const tourSlug = await getCachedTourSlugRedirect({
+      slug,
+      perspective: "published",
+      stega: false,
+    });
+    if (tourSlug) {
+      redirect(`/tours/${tourSlug}`);
+    }
     notFound();
   }
   return <SlugPageContent pageData={pageData} />;
@@ -102,6 +114,14 @@ async function DynamicSlugPage({ params }: { params: Promise<SlugParams> }) {
   ]);
   const pageData = await getCachedSlugPage({ slug, perspective, stega });
   if (!pageData) {
+    const tourSlug = await getCachedTourSlugRedirect({
+      slug,
+      perspective,
+      stega,
+    });
+    if (tourSlug) {
+      redirect(`/tours/${tourSlug}`);
+    }
     notFound();
   }
   return <SlugPageContent pageData={pageData} />;
@@ -122,6 +142,25 @@ async function getCachedSlugPage({
     stega,
   });
   return pageData;
+}
+
+async function getCachedTourSlugRedirect({
+  slug,
+  perspective,
+  stega,
+}: SlugParams & DynamicFetchOptions) {
+  "use cache";
+  if (slug.length !== 1) {
+    return null;
+  }
+  const [tourSlug] = slug;
+  const { data } = await sanityFetch({
+    query: queryTourSlugExists,
+    params: { slug: tourSlug },
+    perspective,
+    stega,
+  });
+  return data;
 }
 
 function SlugPageContent({

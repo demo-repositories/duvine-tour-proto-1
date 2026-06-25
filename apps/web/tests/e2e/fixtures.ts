@@ -42,7 +42,7 @@ export const test = base.extend<{ slugPages: SlugPages }>({
     await use({
       pages: sanitizeSlugs(result.pages ?? []),
       blogs: sanitizeSlugs(result.blogs ?? []),
-      tours: sanitizeSlugs(result.tours ?? []).map((slug) => `/tour/${slug}`),
+      tours: sanitizeSlugs(result.tours ?? []).map((slug) => `/tours/${slug}`),
     });
   },
 });

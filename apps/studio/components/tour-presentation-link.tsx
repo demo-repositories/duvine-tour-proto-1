@@ -2,13 +2,15 @@ import { EarthGlobeIcon } from "@sanity/icons";
 import { Button, Card, Flex, Stack, Text, useToast } from "@sanity/ui";
 import type { HTMLAttributes } from "react";
 import { useCallback, useMemo } from "react";
-import { type SanityDocument, type SlugValue, useFormValue } from "sanity";
+import {
+  getPublishedId,
+  type SanityDocument,
+  type SlugValue,
+  useFormValue,
+} from "sanity";
 import { useRouter } from "sanity/router";
 
-import {
-  getPresentationPreviewPath,
-  getPresentationToolPath,
-} from "@/utils/presentation-preview";
+import { getPresentationPreviewPath } from "@/utils/presentation-preview";
 
 type TourPreviewInputProps = {
   elementProps: HTMLAttributes<HTMLDivElement>;
@@ -17,34 +19,40 @@ type TourPreviewInputProps = {
 export function TourPresentationLinkInput({
   elementProps,
 }: TourPreviewInputProps) {
-  const document = useFormValue([]) as (SanityDocument & {
-    slug?: SlugValue;
-  }) | null;
+  const document = useFormValue([]) as
+    | (SanityDocument & {
+        slug?: SlugValue;
+      })
+    | null;
   const router = useRouter();
   const toast = useToast();
   const slug = document?.slug?.current;
+  const documentId = document?._id ? getPublishedId(document._id) : undefined;
 
   const previewPath = useMemo(
     () => getPresentationPreviewPath({ documentType: "tour", slug }),
     [slug]
   );
-  const presentationPath = useMemo(
-    () => getPresentationToolPath(previewPath),
-    [previewPath]
-  );
 
   const handleOpen = useCallback(() => {
-    if (!presentationPath) {
+    if (!(documentId && previewPath)) {
       toast.push({
         status: "error",
         title: "Add a slug first",
-        description: "This tour needs a URL slug before it can open in Preview.",
+        description:
+          "This tour needs a URL slug before it can open in Preview.",
       });
       return;
     }
 
-    router.navigateUrl({ path: presentationPath });
-  }, [presentationPath, router, toast]);
+    router.navigateIntent("edit", {
+      id: documentId,
+      mode: "presentation",
+      presentation: "presentation",
+      preview: previewPath,
+      type: "tour",
+    });
+  }, [documentId, previewPath, router, toast]);
 
   return (
     <div {...elementProps}>
@@ -59,7 +67,7 @@ export function TourPresentationLinkInput({
             </Text>
           </Stack>
           <Button
-            disabled={!presentationPath}
+            disabled={!(documentId && previewPath)}
             icon={EarthGlobeIcon}
             mode="default"
             onClick={handleOpen}

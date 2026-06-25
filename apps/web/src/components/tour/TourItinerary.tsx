@@ -55,9 +55,7 @@ export function TourItinerary({ days }: { days?: TourItineraryDay[] }) {
         <p className="font-medium text-[#007290] text-sm uppercase tracking-[0.14em]">
           Day by day
         </p>
-        <h2 className="mt-2 font-serif text-4xl text-foreground">
-          Itinerary
-        </h2>
+        <h2 className="mt-2 font-serif text-4xl text-foreground">Itinerary</h2>
       </div>
 
       <ol className="mt-10 space-y-10">
@@ -76,9 +74,7 @@ export function TourItinerary({ days }: { days?: TourItineraryDay[] }) {
                   Day {index + 1}
                 </p>
                 {day.locations ? (
-                  <p className="mt-2 text-muted-foreground">
-                    {day.locations}
-                  </p>
+                  <p className="mt-2 text-muted-foreground">{day.locations}</p>
                 ) : null}
                 <dl className="mt-5 space-y-3 text-muted-foreground">
                   {distance ? (

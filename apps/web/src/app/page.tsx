@@ -74,7 +74,7 @@ function HomeTourLink() {
         asChild
         className="rounded-md bg-[#007290] text-white hover:bg-[#00647e]"
       >
-        <Link href="/tour/colnago-tuscany-bike-tour">
+        <Link href="/tours/colnago-tuscany-bike-tour">
           View Colnago Tuscany Bike Tour
         </Link>
       </Button>
