@@ -226,6 +226,7 @@ export type Tour = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  presentationPreview?: string;
   title: string;
   slug: Slug;
   subtitle?: string;

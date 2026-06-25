@@ -5,7 +5,9 @@ import {
   sanityFetchMetadata,
 } from "@workspace/sanity/live";
 import { queryHomePageData } from "@workspace/sanity/query";
+import { Button } from "@workspace/ui/components/button";
 import { draftMode } from "next/headers";
+import Link from "next/link";
 import { Suspense } from "react";
 
 import { PageBuilder } from "@/components/pagebuilder";
@@ -52,12 +54,32 @@ async function CachedHome({ perspective, stega }: DynamicFetchOptions) {
   });
 
   if (!homePageData) {
-    return <div>No home page data</div>;
+    return <HomeTourLink />;
   }
 
   const { _id, _type, pageBuilder } = homePageData ?? {};
 
-  return <PageBuilder id={_id} pageBuilder={pageBuilder ?? []} type={_type} />;
+  return (
+    <>
+      <PageBuilder id={_id} pageBuilder={pageBuilder ?? []} type={_type} />
+      <HomeTourLink />
+    </>
+  );
+}
+
+function HomeTourLink() {
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-10 md:px-6">
+      <Button
+        asChild
+        className="rounded-md bg-[#007290] text-white hover:bg-[#00647e]"
+      >
+        <Link href="/tour/colnago-tuscany-bike-tour">
+          View Colnago Tuscany Bike Tour
+        </Link>
+      </Button>
+    </section>
+  );
 }
 
 function HomeFallback() {

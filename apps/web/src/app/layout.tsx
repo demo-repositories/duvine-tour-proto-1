@@ -47,7 +47,7 @@ export default async function RootLayout({
   prefetchDNS("https://cdn.sanity.io");
   const { isEnabled: isDraftMode } = await draftMode();
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" style={{ colorScheme: "light" }}>
       <body
         className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} font-sans antialiased`}
       >
