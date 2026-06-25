@@ -47,12 +47,10 @@ export type ImageLinkCardImage = {
 
 export type Distance = {
   kilometers?: number;
-  miles?: number;
 };
 
 export type Elevation = {
   meters?: number;
-  feet?: number;
 };
 
 export type DetailSection = {

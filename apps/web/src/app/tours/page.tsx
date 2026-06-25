@@ -118,24 +118,21 @@ function TourCard({ tour }: { tour: TourIndexItem }) {
 
   return (
     <article className="overflow-hidden rounded-md border border-border bg-white">
-      <Link
-        className="group grid h-full sm:grid-cols-[0.9fr_1.1fr]"
-        href={href}
-      >
-        <div className="aspect-[4/3] overflow-hidden bg-muted sm:aspect-auto">
+      <Link className="group flex h-full flex-col" href={href}>
+        <div className="aspect-[4/3] w-full overflow-hidden bg-muted">
           {tour.heroImage?.id ? (
             <SanityImage
-              className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+              className="block !h-full w-full rounded-none object-cover transition duration-300 group-hover:scale-[1.02]"
               height={700}
               image={tour.heroImage}
               width={900}
             />
           ) : (
-            <div className="h-full min-h-56 bg-muted" aria-hidden />
+            <div className="h-full bg-muted" aria-hidden />
           )}
         </div>
 
-        <div className="flex min-h-72 flex-col p-5">
+        <div className="flex flex-1 flex-col p-5">
           <div className="flex flex-wrap gap-2 text-muted-foreground text-xs">
             {tour.durationDays ? (
               <span className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1">

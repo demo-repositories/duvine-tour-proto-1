@@ -20,28 +20,32 @@ function formatMeals(meals?: string[] | null) {
     .join(", ");
 }
 
+function hasNumber(value: unknown): value is number {
+  return typeof value === "number" && Number.isFinite(value);
+}
+
+function formatNumber(value: number) {
+  return new Intl.NumberFormat("en-US", {
+    maximumFractionDigits: 1,
+  }).format(value);
+}
+
 function formatDistance(day: TourItineraryDay) {
   const kilometers = day.distance?.kilometers;
-  const miles = day.distance?.miles;
-  if (!(kilometers || miles)) {
+  if (!hasNumber(kilometers)) {
     return;
   }
-  if (kilometers && miles) {
-    return `${kilometers} km / ${miles} mi`;
-  }
-  return kilometers ? `${kilometers} km` : `${miles} mi`;
+  const miles = Math.round(kilometers * 0.621_371);
+  return `${formatNumber(kilometers)} km / ${miles} mi`;
 }
 
 function formatClimb(day: TourItineraryDay) {
   const meters = day.elevation?.meters;
-  const feet = day.elevation?.feet;
-  if (!(meters || feet)) {
+  if (!hasNumber(meters)) {
     return;
   }
-  if (meters && feet) {
-    return `${meters} m / ${feet} ft climb`;
-  }
-  return meters ? `${meters} m climb` : `${feet} ft climb`;
+  const feet = Math.round((meters * 3.280_84) / 10) * 10;
+  return `${formatNumber(meters)} m / ${feet} ft climb`;
 }
 
 export function TourItinerary({ days }: { days?: TourItineraryDay[] }) {
@@ -114,6 +118,8 @@ export function TourItinerary({ days }: { days?: TourItineraryDay[] }) {
                       className="aspect-[16/9] h-full w-full rounded-none object-cover"
                       height={900}
                       image={day.image}
+                      maxSrcSetWidth={1600}
+                      queryParams={{ fm: "webp" }}
                       width={1600}
                     />
                   </div>

@@ -8,7 +8,6 @@ import { media } from "sanity-plugin-media";
 
 import { Logo } from "@/components/logo";
 import { locations, mainDocuments } from "@/location";
-import { presentationUrl } from "@/plugins/presentation-url";
 import { schemaTypes } from "@/schemaTypes/index";
 import { structure } from "@/structure";
 import { getPresentationUrl } from "@/utils/helper";
@@ -43,7 +42,6 @@ export default defineConfig({
     structureTool({
       structure,
     }),
-    presentationUrl(),
     visionTool(),
     unsplashImageAsset(),
     media(),

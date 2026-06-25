@@ -1,7 +1,5 @@
 import { defineField, defineType, defineArrayMember } from "sanity";
 
-import { TourPresentationLinkInput } from "@/components/tour-presentation-link";
-
 /**
  * Tour document — the primary editorial surface for a DuVine guided cycling tour.
  *
@@ -32,19 +30,6 @@ export const tourType = defineType({
   ],
 
   fields: [
-    defineField({
-      name: "presentationPreview",
-      title: "Preview",
-      type: "string",
-      description:
-        "Open this tour in Presentation using the same URL guests will see.",
-      group: "editorial",
-      readOnly: true,
-      components: {
-        input: TourPresentationLinkInput,
-      },
-    }),
-
     defineField({
       name: "title",
       title: "Tour name",

@@ -175,13 +175,6 @@
             "type": "number"
           },
           "optional": true
-        },
-        "miles": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "number"
-          },
-          "optional": true
         }
       }
     }
@@ -193,13 +186,6 @@
       "type": "object",
       "attributes": {
         "meters": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "number"
-          },
-          "optional": true
-        },
-        "feet": {
           "type": "objectAttribute",
           "value": {
             "type": "number"
@@ -1381,13 +1367,6 @@
         "value": {
           "type": "string"
         }
-      },
-      "presentationPreview": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
       },
       "title": {
         "type": "objectAttribute",

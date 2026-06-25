@@ -93,7 +93,7 @@ export const itineraryDayType = defineType({
       title: "Riding distance",
       type: "object",
       description:
-        "How far guests ride this day. Both metric and imperial — both are shown to guests based on their region.",
+        "How far guests ride this day. Enter kilometers; miles are calculated for guests on the website.",
       fields: [
         defineField({
           name: "kilometers",
@@ -101,22 +101,16 @@ export const itineraryDayType = defineType({
           title: "Kilometers",
           validation: (R) => R.min(0).max(250),
         }),
-        defineField({
-          name: "miles",
-          type: "number",
-          title: "Miles",
-          validation: (R) => R.min(0).max(160),
-        }),
       ],
     }),
     defineField({
       name: "elevation",
       title: "Climbing",
       type: "object",
-      description: "Optional. Total ascent for the day.",
+      description:
+        "Optional. Total ascent for the day. Enter meters; feet are calculated for guests on the website.",
       fields: [
         defineField({ name: "meters", type: "number", title: "Meters" }),
-        defineField({ name: "feet", type: "number", title: "Feet" }),
       ],
     }),
     defineField({
