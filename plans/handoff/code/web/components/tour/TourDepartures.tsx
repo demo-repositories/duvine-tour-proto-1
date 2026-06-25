@@ -30,7 +30,7 @@ export function TourDepartures({schedule}: {schedule?: Schedule}) {
     <section className="mb-12">
       <h2 className="text-2xl font-medium text-stone-900">Departures</h2>
       <p className="mt-1 text-xs text-stone-500">
-        Source: Centaur
+        Source: Kaptio
         {schedule.lastSyncedAt
           ? ` · synced ${new Date(schedule.lastSyncedAt).toLocaleString()}`
           : null}

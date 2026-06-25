@@ -4,23 +4,23 @@ import { defineField, defineType } from "sanity";
  * Departure schedule — external-system stub.
  *
  * In production, this would be populated by a Sanity Function or webhook
- * from DuVine's Centaur reservation system. For the demo, fields are marked
- * readOnly so the Studio surfaces "this comes from Centaur, look there to change it"
+ * from DuVine's Kaptio reservation system. For the demo, fields are marked
+ * readOnly so the Studio surfaces "this comes from Kaptio, look there to change it"
  * without editors being able to edit prices/dates inline.
  */
 export const departureScheduleType = defineType({
   name: "departureSchedule",
-  title: "Departure schedule (from Centaur)",
+  title: "Departure schedule (from Kaptio)",
   type: "document",
   description:
-    "Live departure data for one tour, sourced from Centaur. The Studio shows this as a read-only preview — the source of truth is Centaur.",
+    "Live departure data for one tour, sourced from Kaptio. The Studio shows this as a read-only preview — the source of truth is Kaptio.",
   fields: [
     defineField({
       name: "tourReference",
-      title: "Centaur tour ID",
+      title: "Kaptio tour ID",
       type: "string",
       description:
-        "The identifier Centaur uses for this tour. Set once when the schedule is linked; do not change.",
+        "The identifier Kaptio uses for this tour. Set once when the schedule is linked; do not change.",
       readOnly: true,
       validation: (Rule) => Rule.required(),
     }),
@@ -29,7 +29,7 @@ export const departureScheduleType = defineType({
       title: "Upcoming departures",
       type: "array",
       description:
-        "Live data from Centaur. Read-only here. Each entry shows the departure date, price, and availability status as Centaur sees them.",
+        "Live data from Kaptio. Read-only here. Each entry shows the departure date, price, and availability status as Kaptio sees them.",
       readOnly: true,
       of: [
         {
@@ -99,7 +99,7 @@ export const departureScheduleType = defineType({
       title: "Last sync",
       type: "datetime",
       description:
-        "When this schedule was last refreshed from Centaur. The Studio shows a timestamp so editors know how fresh the data is.",
+        "When this schedule was last refreshed from Kaptio. The Studio shows a timestamp so editors know how fresh the data is.",
       readOnly: true,
     }),
   ],
@@ -113,7 +113,7 @@ export const departureScheduleType = defineType({
       const count = Array.isArray(departures) ? departures.length : 0;
       const synced = syncedAt ? new Date(syncedAt).toLocaleString() : "never";
       return {
-        title: `Centaur schedule — ${tour || "unlinked"}`,
+        title: `Kaptio schedule — ${tour || "unlinked"}`,
         subtitle: `${count} upcoming · synced ${synced}`,
       };
     },

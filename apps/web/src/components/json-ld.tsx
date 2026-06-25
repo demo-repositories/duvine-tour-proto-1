@@ -17,8 +17,6 @@ import type {
   WebSite,
   WithContext,
 } from "schema-dts";
-
-import { getJsonLdSettings } from "@/lib/json-ld-data";
 import { getBaseUrl } from "@/utils";
 
 type RichTextChild = {
@@ -257,32 +255,4 @@ export function WebSiteJsonLd({ settings }: WebSiteJsonLdProps) {
   };
 
   return <JsonLdScript data={websiteJsonLd} id="website-json-ld" />;
-}
-
-// Combined JSON-LD Component for pages with multiple structured data
-type CombinedJsonLdProps = {
-  settings?: QuerySettingsDataResult;
-  article?: QueryBlogSlugPageDataResult;
-  faqs?: FlexibleFaq[];
-  includeWebsite?: boolean;
-  includeOrganization?: boolean;
-};
-
-export async function CombinedJsonLd({
-  includeWebsite = false,
-  includeOrganization = false,
-}: CombinedJsonLdProps) {
-  const res = await getJsonLdSettings();
-
-  const cleanSettings = stegaClean(res);
-  return (
-    <>
-      {includeWebsite && cleanSettings && (
-        <WebSiteJsonLd settings={cleanSettings} />
-      )}
-      {includeOrganization && cleanSettings && (
-        <OrganizationJsonLd settings={cleanSettings} />
-      )}
-    </>
-  );
 }

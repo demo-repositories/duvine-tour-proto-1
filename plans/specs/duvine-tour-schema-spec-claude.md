@@ -182,7 +182,7 @@ tour:
 
 ## Document: `departure`  *(recommended over an inline array)*
 
-**Why its own document:** the demo is about structured reuse, and departures are exactly where that pays off. As documents you can run "all open departures in October across every tour," derive `tour.priceFrom`, drive Book Now / Waitlist / Sold Out from a single `status` field, and (later) sync inventory from Centaur without touching the tour body. An inline array buries all of that inside one document and can't be queried across tours.
+**Why its own document:** the demo is about structured reuse, and departures are exactly where that pays off. As documents you can run "all open departures in October across every tour," derive `tour.priceFrom`, drive Book Now / Waitlist / Sold Out from a single `status` field, and (later) sync inventory from Kaptio without touching the tour body. An inline array buries all of that inside one document and can't be queried across tours.
 
 ```yaml
 departure:
@@ -231,7 +231,7 @@ departure:
       description: Notable overlapping events, e.g. "L'Eroica Gran Fondo".
     bookingUrl:
       type: url
-      description: Deep link to the booking system (Centaur).
+      description: Deep link to the booking system (Kaptio).
     privateAvailable:
       type: boolean
       description: "Any scheduled tour can be made private."

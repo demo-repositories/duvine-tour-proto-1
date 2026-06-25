@@ -236,7 +236,7 @@ export const tourType = defineType({
       type: 'reference',
       to: [{type: 'departureSchedule'}],
       description:
-        "The live dates and prices for this tour. Departure data comes from Centaur — DuVine's reservation system — so the Studio shows it read-only. To change dates or pricing, update them in Centaur and they'll refresh here within a few minutes.",
+        "The live dates and prices for this tour. Departure data comes from Kaptio — DuVine's reservation system — so the Studio shows it read-only. To change dates or pricing, update them in Kaptio and they'll refresh here within a few minutes.",
       group: 'bookings',
       validation: (Rule) => Rule.required(),
     }),

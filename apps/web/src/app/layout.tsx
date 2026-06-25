@@ -16,7 +16,7 @@ import {
   DynamicFooter,
   FooterSkeleton,
 } from "@/components/footer";
-import { CombinedJsonLd } from "@/components/json-ld";
+import { CombinedJsonLd } from "@/components/combined-json-ld";
 import { Navbar, NavbarSkeleton } from "@/components/navbar";
 import { PreviewBar } from "@/components/preview-bar";
 import { Providers } from "@/components/providers";
@@ -68,7 +68,9 @@ export default async function RootLayout({
             <CachedFooter perspective="published" stega={false} />
           )}
           <SanityLive action={sanityLiveAction} includeDrafts={isDraftMode} />
-          <CombinedJsonLd includeOrganization includeWebsite />
+          <Suspense fallback={null}>
+            <CombinedJsonLd includeOrganization includeWebsite />
+          </Suspense>
           {isDraftMode && (
             <>
               <PreviewBar />

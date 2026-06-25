@@ -37,7 +37,7 @@ The following decisions are made. Don't reopen them without checking with @allan
 | Itinerary days | Inline array of objects on the tour document |
 | Highlights / Eat / Drink | Polymorphic `highlightBlock` with category enum |
 | Inclusions + Details | Flexible `detailSection[]` array |
-| Dates and availability | External-system stub (`departureSchedule` doc), read-only in Studio, labeled as sourced from Centaur |
+| Dates and availability | External-system stub (`departureSchedule` doc), read-only in Studio, labeled as sourced from Kaptio |
 | Region modeling | Skip for demo, mentioned in a sentence only |
 | Localization | Skip for demo, mentioned as separate future demo |
 | Business logic to showcase | Cross-field validator (itinerary length must equal `durationDays`), reference filter (bike picker filtered by tour difficulty + active status), conditional visibility (`privateOnlyDetails` only when `privateOnly` is on), async validator (homepage featured cap of 6) |

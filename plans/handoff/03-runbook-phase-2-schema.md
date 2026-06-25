@@ -100,7 +100,7 @@ Navigate to `http://localhost:3333`. In the sidebar / structure tool, you should
 
 - **Tour** (new)
 - **Bike** (new)
-- **Departure schedule (from Centaur)** (new)
+- **Departure schedule (from Kaptio)** (new)
 - ... (starter's existing types)
 
 Click **Tour** → **Create** → empty Tour document opens.

@@ -8,6 +8,6 @@ export const structure = (S: StructureBuilder) =>
       S.documentTypeListItem("tour").title("Tours").icon(Route),
       S.documentTypeListItem("bike").title("Bikes").icon(Bike),
       S.documentTypeListItem("departureSchedule")
-        .title("Departure schedules from Centaur")
+        .title("Departure schedules from Kaptio")
         .icon(CalendarDays),
     ]);

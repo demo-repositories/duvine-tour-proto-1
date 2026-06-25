@@ -97,7 +97,7 @@ Use this if you want to demo the moments in isolation (alternative posture, or f
 - Region modeling (mention only — "this would be its own demo").
 - SEO field (works fine; not interesting to non-technical editors).
 - TypeGen / GROQ / code-side of things (Gwen and Mia don't care; offer offline to their developer if asked).
-- The Centaur stub story past 60 seconds. The line is "Sanity composes external data without owning it." Don't get into webhook architecture.
+- The Kaptio stub story past 60 seconds. The line is "Sanity composes external data without owning it." Don't get into webhook architecture.
 
 ## Tone notes
 

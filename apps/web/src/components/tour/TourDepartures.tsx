@@ -81,7 +81,7 @@ export function TourDepartures({
             </h2>
           </div>
           <p className="text-muted-foreground text-sm">
-            Source: Centaur
+            Source: Kaptio
             {schedule.lastSyncedAt
               ? `, synced ${new Date(
                   stegaClean(schedule.lastSyncedAt)

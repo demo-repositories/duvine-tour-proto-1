@@ -19,7 +19,7 @@ The Studio sidebar is intentionally small:
 
 - Tours
 - Bikes
-- Departure schedules from Centaur
+- Departure schedules from Kaptio
 
 ## Local setup
 

@@ -4,7 +4,7 @@ This folder has the M1 demo seed for the DuVine Studio:
 
 - 1 tour: Colnago Tuscany Bike Tour
 - 3 bikes
-- 1 Centaur-style departure schedule with 4 departures
+- 1 Kaptio-style departure schedule with 4 departures
 
 Run from the repo root:
 

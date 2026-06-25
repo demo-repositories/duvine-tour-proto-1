@@ -15,7 +15,7 @@ Don't reopen these without checking with @allanwhite.
 | 7 | Itinerary days | Inline array of objects on tour document, not separate document type |
 | 8 | Highlights / Eat / Drink | Polymorphic `highlightBlock` with category enum |
 | 9 | Inclusions + Details | Flexible `detailSection[]` array |
-| 10 | Dates and availability | External-system stub (`departureSchedule`), read-only in Studio, labeled "Source: Centaur" |
+| 10 | Dates and availability | External-system stub (`departureSchedule`), read-only in Studio, labeled "Source: Kaptio" |
 | 11 | Region modeling | Skip for demo |
 | 12 | Localization | Skip for demo |
 | 13 | Business logic to showcase | Cross-field validator, reference filter, conditional visibility, async featured cap |
@@ -57,7 +57,7 @@ The Claude schema has good production instincts, but the first build should stay
 - Standalone editable `departure` documents.
 - Weather inheritance, breadcrumb traversal, or collection/level page logic.
 
-The Studio should stay organized around the editor's task: build and publish one tour page. Keep the top-level desk simple: Tours, Bikes, and Departure schedules from Centaur.
+The Studio should stay organized around the editor's task: build and publish one tour page. Keep the top-level desk simple: Tours, Bikes, and Departure schedules from Kaptio.
 
 ## Open questions for @allanwhite (still open)
 

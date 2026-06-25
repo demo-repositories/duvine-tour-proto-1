@@ -22,7 +22,7 @@ If the command asks "Replace existing documents with the same ID?" answer **y**.
 Open Studio (`http://localhost:3333`). You should see:
 
 - 3 Bike documents in the Bike list
-- 1 "Centaur schedule — DVN-COLNAGO-TUSCANY-2026" in the departureSchedule list
+- 1 "Kaptio schedule — DVN-COLNAGO-TUSCANY-2026" in the departureSchedule list
 - 1 Tour "Colnago Tuscany Bike Tour" in the Tour list
 
 Open the Tour. Verify:

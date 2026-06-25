@@ -12,7 +12,7 @@ This spec defines the Sanity schema for a standalone demo Studio used in the upc
 
 Decisions locked with @allanwhite:
 - **Bikes** are separate documents, referenced from tours.
-- **Dates + availability** live in an external system (Centaur in production). For the demo, modeled as an external-system stub — the tour references a `departureSchedule` that pulls live from Centaur, shown as a read-only preview block.
+- **Dates + availability** live in an external system (Kaptio in production). For the demo, modeled as an external-system stub — the tour references a `departureSchedule` that pulls live from Kaptio, shown as a read-only preview block.
 - **Itinerary days** are an array of inline objects on the tour. Not a separate document type.
 - **Highlights / Eat / Drink** are one polymorphic block with a category enum, so the team can add Sleep, Stay, or other categories later without schema work.
 - **Inclusions + details** are a flexible array of `{heading, body}` entries.
@@ -26,7 +26,7 @@ Decisions locked with @allanwhite:
 |---|---|---|
 | `tour` | document | The primary product page. Most of the editorial work happens here. |
 | `bike` | document | Reused fleet bike (Colnago C68, BMC Roadmachine, etc.). Stub for the demo — 6 fields. |
-| `departureSchedule` | document | External-system stub representing the live Centaur feed for one tour's departures. Read-only in Studio; pulled via a server-side function. |
+| `departureSchedule` | document | External-system stub representing the live Kaptio feed for one tour's departures. Read-only in Studio; pulled via a server-side function. |
 | `itineraryDay` | object (inline) | Repeating day block inside a tour. Not a standalone document. |
 | `highlightBlock` | object (inline) | A category-tagged group of short editorial bullets (Highlights, Eat, Drink, Sleep, ...). |
 | `detailSection` | object (inline) | One entry in the Inclusions + Details accordion. |
@@ -39,7 +39,7 @@ These principles drove the field shapes below. Worth naming so the SE can refer 
 2. **Repeatable structure stays editable as a list, not a form.** Itinerary days, highlight bullets, and inclusion sections are arrays the editor can reorder, expand, or collapse. Drag-to-reorder is the gesture.
 3. **The schema names match the way DuVine already talks about their product.** "Tour Highlights," "Eat," "Drink," "Itinerary," "Inclusions + Details," "Bikes" come straight from their page. The Studio shouldn't make editors learn new vocabulary.
 4. **Editorial guardrails over editorial freedom where it counts.** A tour can't be published without a hero image, a tour duration, at least three itinerary days, and at least one bike. Better to block publish than to let a half-finished tour go live.
-5. **External-system data is visible but not editable.** The departure schedule is read-only in Studio with a clear "Source: Centaur" label, so editors know where to go if dates need to change.
+5. **External-system data is visible but not editable.** The departure schedule is read-only in Studio with a clear "Source: Kaptio" label, so editors know where to go if dates need to change.
 
 ## `tour` — the primary document
 
@@ -225,14 +225,14 @@ fields:
     to: [{ type: departureSchedule }]
     title: Departure schedule
     description: |
-      The live dates and prices for this tour. Departure data comes from Centaur
+      The live dates and prices for this tour. Departure data comes from Kaptio
       — DuVine's reservation system — so the Studio shows it read-only. To change
-      dates or pricing, update them in Centaur and they'll refresh here within
+      dates or pricing, update them in Kaptio and they'll refresh here within
       a few minutes.
     validation: required
     group: bookings
     options:
-      readOnly: true  # editors can pick the linked schedule once; the schedule's content syncs from Centaur
+      readOnly: true  # editors can pick the linked schedule once; the schedule's content syncs from Kaptio
 
   # VISIBILITY AND STATUS
 
@@ -595,19 +595,19 @@ preview:
 ```yaml
 name: departureSchedule
 type: document
-title: Departure schedule (from Centaur)
+title: Departure schedule (from Kaptio)
 description: |
-  Live departure data for one tour, sourced from Centaur. The Studio shows this
-  as a read-only preview — the source of truth is Centaur. To change dates,
-  pricing, or availability, update them in Centaur and they'll refresh here.
+  Live departure data for one tour, sourced from Kaptio. The Studio shows this
+  as a read-only preview — the source of truth is Kaptio. To change dates,
+  pricing, or availability, update them in Kaptio and they'll refresh here.
 
 fields:
 
   - name: tourReference
     type: string
-    title: Centaur tour ID
+    title: Kaptio tour ID
     description: |
-      The identifier Centaur uses for this tour. Set once when the schedule is
+      The identifier Kaptio uses for this tour. Set once when the schedule is
       linked; do not change.
     readOnly: true
     validation: required
@@ -616,8 +616,8 @@ fields:
     type: array
     title: Upcoming departures
     description: |
-      Live data from Centaur. Read-only here. Each entry shows the departure
-      date, price, and availability status as Centaur sees them.
+      Live data from Kaptio. Read-only here. Each entry shows the departure
+      date, price, and availability status as Kaptio sees them.
     readOnly: true
     of:
       - type: object
@@ -633,7 +633,7 @@ fields:
     type: datetime
     title: Last sync
     description: |
-      When this schedule was last refreshed from Centaur. The Studio shows a
+      When this schedule was last refreshed from Kaptio. The Studio shows a
       timestamp so editors know how fresh the data is.
     readOnly: true
 
@@ -643,15 +643,15 @@ preview:
     syncedAt: lastSyncedAt
     count: departures.length
   prepare:
-    title: 'Centaur schedule — <tourReference>'
+    title: 'Kaptio schedule — <tourReference>'
     subtitle: '<count> upcoming departures · synced <syncedAt>'
 ```
 
 ### How the external-system story lands in the demo
 
-The departure schedule is read-only in Studio with a visible "Source: Centaur" label and a last-sync timestamp. The demo moment is: "DuVine has a Java reservation system called Centaur that owns booking truth — we don't want marketing editors changing prices. Sanity composes the live data into the page without pretending to own it. The editor sees the same data the guest sees, and knows to update Centaur if it's wrong." That's a 60-second moment, not a chapter.
+The departure schedule is read-only in Studio with a visible "Source: Kaptio" label and a last-sync timestamp. The demo moment is: "DuVine has a reservation system called Kaptio that owns booking truth — we don't want marketing editors changing prices. Sanity composes the live data into the page without pretending to own it. The editor sees the same data the guest sees, and knows to update Kaptio if it's wrong." That's a 60-second moment, not a chapter.
 
-For the demo Studio, the `departures` array is hand-populated with three plausible Colnago Tuscany departures. In production this would be a function pulling from Centaur on a schedule, or via a webhook on Centaur changes.
+For the demo Studio, the `departures` array is hand-populated with three plausible Colnago Tuscany departures. In production this would be a function pulling from Kaptio on a schedule, or via a webhook on Kaptio changes.
 
 ## What this schema demonstrates
 
@@ -660,7 +660,7 @@ Six talking points the schema enables, in priority order. Not a script — a men
 1. **The Studio speaks DuVine's language.** Field titles, descriptions, and validation messages match the vocabulary on the live site — Tour Highlights, Eat, Drink, Itinerary, Inclusions + Details, Bikes. No translation required.
 2. **The schema enforces editorial truth.** A tour can't go live with a 7-day duration and 5 itinerary days. A featured tour can't sneak past the homepage cap. A private-only tour hides its details from the public listing without the editor having to remember to set six other fields.
 3. **References do what references should.** Bikes are picked from a filtered list (active only, difficulty-appropriate) — not a free-text field or a flat dropdown of 200 bikes. A bike retired tomorrow disappears from every tour's picker; published tours that already reference it continue to show the bike at the version they linked.
-4. **External-system data is composed, not copied.** Centaur owns booking truth. Sanity shows it read-only, with a sync timestamp, so editors know where to go to change it. The marketing site composes both into one experience without one team stepping on the other.
+4. **External-system data is composed, not copied.** Kaptio owns booking truth. Sanity shows it read-only, with a sync timestamp, so editors know where to go to change it. The marketing site composes both into one experience without one team stepping on the other.
 5. **Photography is treated as content.** Every image has hotspot, crop, alt-text, caption, and credit — first-class fields, not afterthoughts. Gwen's images become reusable assets with the metadata they deserve.
 6. **The schema is a file in a git repo.** When DuVine adds a new highlight category (say, "Wellness") or a new field on tour (say, "Suggested fitness level"), it's a code change reviewed in a pull request, deployed atomically, and versioned with the rest of the codebase. The current state of the schema is always knowable; no console clicks, no drift between environments.
 
