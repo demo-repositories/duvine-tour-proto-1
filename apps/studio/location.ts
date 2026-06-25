@@ -47,4 +47,20 @@ export const locations = {
       ],
     }),
   }),
+  tour: defineLocations({
+    select: {
+      title: "title",
+      slug: "slug.current",
+    },
+    resolve: (doc) => ({
+      locations: doc?.slug
+        ? [
+            {
+              title: doc?.title || "Untitled tour",
+              href: `/tour/${doc.slug}`,
+            },
+          ]
+        : [],
+    }),
+  }),
 };

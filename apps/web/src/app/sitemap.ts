@@ -1,11 +1,13 @@
 import { sanityFetchMetadata } from "@workspace/sanity/live";
 import { querySitemapData } from "@workspace/sanity/query";
-import type { QuerySitemapDataResult } from "@workspace/sanity/types";
 import type { MetadataRoute } from "next";
 
 import { getBaseUrl } from "@/utils";
 
-type Page = QuerySitemapDataResult["slugPages"][number];
+type SitemapPage = {
+  slug?: string | null;
+  lastModified?: string | null;
+};
 
 const baseUrl = getBaseUrl();
 
@@ -14,7 +16,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     query: querySitemapData,
     perspective: "published",
   });
-  const { slugPages, blogPages } = data ?? { slugPages: [], blogPages: [] };
+  const { slugPages, blogPages, tourPages } = data ?? {
+    slugPages: [],
+    blogPages: [],
+    tourPages: [],
+  };
   return [
     {
       url: baseUrl,
@@ -22,17 +28,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 1,
     },
-    ...slugPages.map((page: Page) => ({
+    ...slugPages.map((page: SitemapPage) => ({
       url: `${baseUrl}${page.slug}`,
       lastModified: new Date(page.lastModified ?? new Date()),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),
-    ...blogPages.map((page: Page) => ({
+    ...blogPages.map((page: SitemapPage) => ({
       url: `${baseUrl}${page.slug}`,
       lastModified: new Date(page.lastModified ?? new Date()),
       changeFrequency: "weekly" as const,
       priority: 0.5,
+    })),
+    ...tourPages.map((page: SitemapPage) => ({
+      url: `${baseUrl}/tour/${page.slug}`,
+      lastModified: new Date(page.lastModified ?? new Date()),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
     })),
   ];
 }

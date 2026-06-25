@@ -5,7 +5,7 @@ import {
   getDynamicFetchOptions,
   SanityLive,
 } from "@workspace/sanity/live";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Figtree, Geist_Mono, Playfair_Display } from "next/font/google";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
 import { Suspense } from "react";
@@ -23,14 +23,19 @@ import { Providers } from "@/components/providers";
 import { getNavigationData } from "@/lib/navigation";
 import { sanityLiveAction } from "@/lib/sanity-live-action";
 
-const fontSans = Geist({
+const fontSans = Figtree({
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-figtree",
+});
+
+const fontSerif = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
 });
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-geist-mono",
 });
 
 export default async function RootLayout({
@@ -44,7 +49,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased`}
+        className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} font-sans antialiased`}
       >
         <Providers>
           {isDraftMode ? (

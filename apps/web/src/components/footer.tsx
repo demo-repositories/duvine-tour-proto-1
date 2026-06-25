@@ -109,6 +109,7 @@ function SocialLinks({ data }: SocialLinksProps) {
 export function FooterSkeleton() {
   return (
     <footer className="mt-16 pb-8">
+      <div className="mb-10 h-1 w-full bg-[#DBE035]" aria-hidden />
       <section className="container mx-auto px-4 md:px-6">
         <div className="h-[500px] lg:h-auto">
           <div className="flex flex-col items-center justify-between gap-10 text-center lg:flex-row lg:text-left">
@@ -164,6 +165,7 @@ function Footer({ data, settingsData }: FooterProps) {
 
   return (
     <footer className="mt-20 pb-8">
+      <div className="mb-10 h-1 w-full bg-[#DBE035]" aria-hidden />
       <section className="container mx-auto">
         <div className="h-[500px] lg:h-auto">
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-10 px-4 text-center md:px-6 lg:flex-row lg:text-left">

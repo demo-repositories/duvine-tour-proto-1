@@ -60,6 +60,28 @@ const richTextFragment = /* groq */ `
   }
 `;
 
+const tourMarkDefsFragment = /* groq */ `
+  markDefs[]{
+    ...,
+    _type == "link" => {
+      href
+    },
+    ${customLinkFragment}
+  }
+`;
+
+const tourPortableTextFragment = /* groq */ `
+  ...,
+  _type == "block" => {
+    ...,
+    ${tourMarkDefsFragment}
+  },
+  _type == "image" => {
+    ${imageFields},
+    "caption": caption
+  }
+`;
+
 const blogAuthorFragment = /* groq */ `
   authors[0]->{
     _id,
@@ -281,6 +303,94 @@ export const queryBlogPaths = defineQuery(`
   *[_type == "blog" && defined(slug.current)].slug.current
 `);
 
+export const queryTourBySlug = defineQuery(`
+  *[_type == "tour" && slug.current == $slug][0]{
+    _id,
+    _type,
+    title,
+    subtitle,
+    "slug": slug.current,
+    heroImage {
+      ${imageFields},
+      caption,
+      credit
+    },
+    durationDays,
+    difficulty,
+    introduction[]{
+      ${tourPortableTextFragment}
+    },
+    highlightBlocks[]{
+      _key,
+      _type,
+      category,
+      items
+    },
+    itinerary[]{
+      _key,
+      _type,
+      title,
+      locations,
+      description[]{
+        ${tourPortableTextFragment}
+      },
+      image {
+        ${imageFields}
+      },
+      distance,
+      elevation,
+      meals,
+      accommodation
+    },
+    detailSections[]{
+      _key,
+      _type,
+      heading,
+      body[]{
+        ${tourPortableTextFragment}
+      },
+      pinToTop
+    },
+    bikes[]->{
+      _id,
+      _type,
+      name,
+      manufacturer,
+      model,
+      heroImage {
+        ${imageFields}
+      },
+      description[]{
+        ${tourPortableTextFragment}
+      },
+      suitableForDifficulty,
+      status
+    },
+    departureSchedule->{
+      _id,
+      _type,
+      tourReference,
+      departures[]{
+        _key,
+        startDate,
+        endDate,
+        priceUSD,
+        status,
+        notes
+      },
+      lastSyncedAt
+    },
+    privateOnly,
+    privateOnlyDetails,
+    featured,
+    seo
+  }
+`);
+
+export const queryTourPaths = defineQuery(`
+  *[_type == "tour" && defined(slug.current)].slug.current
+`);
+
 const ogFieldsFragment = /* groq */ `
   _id,
   _type,
@@ -389,6 +499,10 @@ export const querySitemapData = defineQuery(`{
     "lastModified": _updatedAt
   },
   "blogPages": *[_type == "blog" && defined(slug.current)]{
+    "slug": slug.current,
+    "lastModified": _updatedAt
+  },
+  "tourPages": *[_type == "tour" && defined(slug.current)]{
     "slug": slug.current,
     "lastModified": _updatedAt
   }

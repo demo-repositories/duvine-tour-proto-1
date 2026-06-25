@@ -1,7 +1,11 @@
 import { Logger } from "@workspace/logger";
 import { cn } from "@workspace/ui/lib/utils";
 import Link from "next/link";
-import { PortableText, type PortableTextReactComponents } from "next-sanity";
+import {
+  PortableText,
+  type PortableTextBlock,
+  type PortableTextReactComponents,
+} from "next-sanity";
 
 import type { SanityRichTextProps } from "@/types";
 import { parseChildrenToSlug } from "@/utils";
@@ -61,6 +65,23 @@ const components: Partial<PortableTextReactComponents> = {
         {children}
       </code>
     ),
+    link: ({ children, value }) => {
+      if (!value?.href) {
+        return <>{children}</>;
+      }
+      const isExternal = /^https?:\/\//.test(value.href);
+      return (
+        <Link
+          className="underline decoration-dotted underline-offset-2"
+          href={value.href}
+          prefetch={false}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+          target={isExternal ? "_blank" : undefined}
+        >
+          {children}
+        </Link>
+      );
+    },
     customLink: ({ children, value }) => {
       if (!value.href || value.href === "#") {
         return (
@@ -130,7 +151,7 @@ export function RichText<T extends SanityRichTextProps>({
         onMissingComponent={(_, { nodeType, type }) => {
           logger.warn(`Missing component: ${nodeType} for type: ${type}`);
         }}
-        value={richText}
+        value={richText as PortableTextBlock[]}
       />
     </div>
   );

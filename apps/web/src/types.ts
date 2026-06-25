@@ -2,7 +2,6 @@ import type { FilterByType, Get } from "@sanity/codegen";
 import type { SanityImageData } from "@workspace/sanity/image";
 import type {
   QueryBlogIndexPageBlogsResult,
-  QueryBlogSlugPageDataResult,
   QueryGlobalSeoSettingsResult,
   QueryHomePageDataResult,
   QueryNavbarDataResult,
@@ -25,12 +24,30 @@ export type SanityButtonProps = Get<PagebuilderType<"hero">, "buttons", number>;
 
 export type SanityImageProps = SanityImageData;
 
-export type SanityRichTextProps = Get<QueryBlogSlugPageDataResult, "richText">;
+export type SanityTextChild = {
+  marks?: string[];
+  text?: string;
+  _type: "span";
+  _key: string;
+};
 
-export type SanityRichTextBlock = FilterByType<
-  NonNullable<NonNullable<SanityRichTextProps>[number]>,
-  "block"
->;
+export type SanityPortableTextBlock = {
+  _type: "block";
+  _key: string;
+  style?: string;
+  children?: SanityTextChild[];
+  [key: string]: unknown;
+};
+
+export type SanityRichTextBlock =
+  | SanityPortableTextBlock
+  | {
+      _type: string;
+      _key?: string;
+      [key: string]: unknown;
+    };
+
+export type SanityRichTextProps = SanityRichTextBlock[] | null | undefined;
 
 export type Blog = Get<QueryBlogIndexPageBlogsResult, number>;
 

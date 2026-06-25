@@ -24,7 +24,11 @@ test.describe("Smoke: dynamic slug pages", { tag: "@smoke" }, () => {
   }) => {
     test.setTimeout(5 * 60_000);
 
-    const allSlugs = [...slugPages.pages, ...slugPages.blogs];
+    const allSlugs = [
+      ...slugPages.pages,
+      ...slugPages.blogs,
+      ...slugPages.tours,
+    ];
 
     expect(allSlugs.length).toBeGreaterThan(0);
 

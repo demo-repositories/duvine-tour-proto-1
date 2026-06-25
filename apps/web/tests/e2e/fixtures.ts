@@ -4,6 +4,7 @@ import { createClient } from "@sanity/client";
 interface SlugPages {
   pages: string[];
   blogs: string[];
+  tours: string[];
 }
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -34,12 +35,14 @@ export const test = base.extend<{ slugPages: SlugPages }>({
   slugPages: async ({}, use) => {
     const result = await sanityClient.fetch<SlugPages>(`{
       "pages": *[_type == "page" && defined(slug.current)].slug.current,
-      "blogs": *[_type == "blog" && defined(slug.current)].slug.current
+      "blogs": *[_type == "blog" && defined(slug.current)].slug.current,
+      "tours": *[_type == "tour" && defined(slug.current)].slug.current
     }`);
 
     await use({
       pages: sanitizeSlugs(result.pages ?? []),
       blogs: sanitizeSlugs(result.blogs ?? []),
+      tours: sanitizeSlugs(result.tours ?? []).map((slug) => `/tour/${slug}`),
     });
   },
 });
