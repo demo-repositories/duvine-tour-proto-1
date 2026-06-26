@@ -91,6 +91,18 @@ export const blog = defineType({
         "The date when your blog post will appear to have been published",
       group: GROUP.MAIN_CONTENT,
     }),
+    defineField({
+      name: "relatedTour",
+      type: "reference",
+      title: "Related tour",
+      description:
+        "Optional. Pick one tour to feature beside this article. This appears as a card on the blog post page.",
+      to: [{ type: "tour" }],
+      options: {
+        disableNew: true,
+      },
+      group: GROUP.MAIN_CONTENT,
+    }),
     imageWithAltField({
       title: "Image",
       description:

@@ -81,6 +81,22 @@ try {
       "highlightCount": count(highlightBlocks[]),
       "hasHeroImage": defined(heroImage.asset),
       "missingItineraryImages": count(itinerary[!defined(image.asset)])
+    },
+    "blogIndex": *[_id == "blogIndex"][0] {
+      title,
+      "slug": slug.current
+    },
+    "author": *[_id == "author-duvine-guides"][0] {
+      name,
+      "hasImage": defined(image.asset)
+    },
+    "blog": *[_id == "blog-colnago-tuscany-guide"][0] {
+      title,
+      "slug": slug.current,
+      "authorCount": count(authors[]),
+      "relatedTourRef": relatedTour._ref,
+      "bodyCount": count(richText[]),
+      "hasImage": defined(image.asset)
     }
   }`);
 } catch (error) {
@@ -121,6 +137,32 @@ if (!result.tour) {
     failures.push(`Expected at least 3 detail sections, found ${result.tour.detailCount}.`);
   }
 }
+if (!result.blogIndex) {
+  failures.push("Missing blogIndex.");
+} else if (result.blogIndex.slug !== "/blog") {
+  failures.push(`Unexpected blog index slug: ${result.blogIndex.slug}.`);
+}
+if (!result.author) {
+  failures.push("Missing author-duvine-guides.");
+}
+if (!result.blog) {
+  failures.push("Missing blog-colnago-tuscany-guide.");
+} else {
+  if (result.blog.slug !== "/blog/colnago-tuscany-bike-tour-guide") {
+    failures.push(`Unexpected blog slug: ${result.blog.slug}.`);
+  }
+  if (result.blog.authorCount !== 1) {
+    failures.push(`Expected 1 blog author, found ${result.blog.authorCount}.`);
+  }
+  if (result.blog.relatedTourRef !== "tour-colnago-tuscany") {
+    failures.push(
+      `Expected blog relatedTour to reference tour-colnago-tuscany, found ${result.blog.relatedTourRef}.`
+    );
+  }
+  if (result.blog.bodyCount < 3) {
+    failures.push(`Expected at least 3 blog body blocks, found ${result.blog.bodyCount}.`);
+  }
+}
 
 if (failures.length > 0) {
   console.error("Seed check failed:");
@@ -134,6 +176,8 @@ const missingBikeImages = result.bikes.filter((bike) => !bike.hasImage).length;
 const missingTourImages =
   (result.tour?.hasHeroImage ? 0 : 1) +
   (result.tour?.missingItineraryImages ?? 0);
+const missingBlogImages =
+  (result.blog?.hasImage ? 0 : 1) + (result.author?.hasImage ? 0 : 1);
 
 console.log("Seed check passed.");
 console.log(`- Bikes: ${result.bikes.length}`);
@@ -141,8 +185,12 @@ console.log(`- Departures: ${result.schedule.departureCount}`);
 console.log(
   `- Tour: ${result.tour.title} (${result.tour.itineraryCount} days, ${result.tour.bikeCount} bikes)`
 );
+console.log(`- Blog: ${result.blog.title} (${result.blog.slug})`);
 if (missingBikeImages || missingTourImages) {
   console.log(
     `- Images still needed: ${missingTourImages} tour/itinerary, ${missingBikeImages} bike`
   );
+}
+if (missingBlogImages) {
+  console.log(`- Blog images still needed: ${missingBlogImages}`);
 }

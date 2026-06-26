@@ -91,6 +91,23 @@ const blogAuthorFragment = /* groq */ `
   }
 `;
 
+const relatedTourFragment = /* groq */ `
+  relatedTour->{
+    _id,
+    _type,
+    title,
+    subtitle,
+    "slug": slug.current,
+    heroImage {
+      ${imageFields},
+      caption,
+      credit
+    },
+    durationDays,
+    difficulty
+  }
+`;
+
 const blogCardFragment = /* groq */ `
   _type,
   _id,
@@ -294,6 +311,7 @@ export const queryBlogSlugPageData = defineQuery(`
     "slug": slug.current,
     ${blogAuthorFragment},
     ${imageFragment},
+    ${relatedTourFragment},
     ${richTextFragment},
     ${pageBuilderFragment}
   }

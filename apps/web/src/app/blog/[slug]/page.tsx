@@ -15,6 +15,10 @@ import { RichText } from "@/components/elements/rich-text";
 import { SanityImage } from "@/components/elements/sanity-image";
 import { TableOfContent } from "@/components/elements/table-of-content";
 import { ArticleJsonLd } from "@/components/json-ld";
+import {
+  RelatedTourCard,
+  type RelatedTour,
+} from "@/components/related-tour-card";
 import { getSEOMetadata } from "@/lib/seo";
 
 const logger = new Logger("BlogSlug");
@@ -135,6 +139,8 @@ function BlogPageContent({
   data: NonNullable<Awaited<ReturnType<typeof getCachedBlogPage>>>;
 }) {
   const { title, description, image, richText } = data ?? {};
+  const relatedTour =
+    (data as { relatedTour?: RelatedTour | null }).relatedTour ?? null;
 
   return (
     <div className="container mx-auto my-16 px-4 md:px-6">
@@ -157,11 +163,15 @@ function BlogPageContent({
               />
             </div>
           )}
+          {relatedTour ? (
+            <RelatedTourCard className="mb-12 lg:hidden" tour={relatedTour} />
+          ) : null}
           <RichText richText={richText} />
         </main>
 
         <div className="hidden lg:block">
-          <div className="sticky top-4 rounded-lg">
+          <div className="sticky top-4 space-y-6 rounded-lg">
+            <RelatedTourCard tour={relatedTour} />
             <TableOfContent richText={richText ?? []} />
           </div>
         </div>
