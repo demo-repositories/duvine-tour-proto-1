@@ -4,6 +4,7 @@ import { defineEnableDraftMode } from "next-sanity/draft-mode";
 
 export const { GET } = defineEnableDraftMode({
   client: client.withConfig({ token: env.SANITY_API_READ_TOKEN }),
+  secureDevMode: true,
 });
 
 export const HEAD = () => new Response(null, { status: 200 });
