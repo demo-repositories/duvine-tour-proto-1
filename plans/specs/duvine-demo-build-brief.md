@@ -26,7 +26,7 @@ The following decisions are made. Don't reopen them without checking with @allan
 
 | Decision | Resolution |
 |---|---|
-| Starter template | `https://github.com/robotostudio/turbo-start-sanity` (Roboto Studio's Turborepo Next.js + Sanity starter). pnpm monorepo. Visual Editing + Presentation tool already wired. |
+| Starter template | `https://github.com/robotostudio/turbo-start-sanity` (DuVine Adventures's Turborepo Next.js + Sanity starter). pnpm monorepo. Visual Editing + Presentation tool already wired. |
 | Sanity org | `o6LGneXO1` (Allan's org — `https://www.sanity.io/organizations/o6LGneXO1`) |
 | Sanity Studio app ID | `pi3k2gs31ap8kre2gjok6cvq` |
 | GitHub repo | `demo-repositories/duvine-tour-proto-1` |

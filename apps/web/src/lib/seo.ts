@@ -36,8 +36,8 @@ type OgImageParams = {
 
 // Fallbacks used until the Settings document is populated in the Studio
 const FALLBACK_SITE_CONFIG: SiteConfig = {
-  title: "Roboto Studio Demo",
-  description: "Roboto Studio Demo",
+  title: "DuVine Adventures Demo",
+  description: "DuVine Adventures Demo",
   twitterHandle: "@studioroboto",
   keywords: ["roboto", "studio", "demo", "sanity", "next", "react", "template"],
 };
