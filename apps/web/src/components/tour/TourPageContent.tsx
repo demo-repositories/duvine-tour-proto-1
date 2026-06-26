@@ -7,10 +7,12 @@ import { TourHighlights } from "./TourHighlights";
 import { TourIntroduction } from "./TourIntroduction";
 import { TourItinerary } from "./TourItinerary";
 import { TourPrivateNotice } from "./TourPrivateNotice";
+import { TourPromoBar } from "./TourPromoBar";
 
 export function TourPageContent({ tour }: { tour: TourPageData }) {
   return (
     <main>
+      <TourPromoBar schedule={tour.departureSchedule} />
       <TourHero tour={tour} />
       {tour.privateOnly && tour.privateOnlyDetails ? (
         <TourPrivateNotice note={tour.privateOnlyDetails} />
