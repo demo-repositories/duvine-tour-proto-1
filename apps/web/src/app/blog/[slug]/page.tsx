@@ -154,7 +154,7 @@ function BlogPageContent({
 
   return (
     <div className="container mx-auto my-16 px-4 md:px-6">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,48rem)_300px] lg:justify-center">
         <main>
           <ArticleJsonLd article={data} />
           <BlogHeroImage image={image} title={title} />
@@ -233,15 +233,18 @@ function BlogArticleMeta({
       {author?.name ? (
         <div className="flex items-center gap-3">
           {author.image?.id ? (
-            <SanityImage
-              alt={author.image.alt ?? author.name}
-              className="size-10 rounded-full object-cover"
-              height={80}
-              image={author.image}
-              width={80}
-            />
+            <div className="size-12 max-h-[60px] max-w-[60px] shrink-0 overflow-hidden rounded-full bg-muted">
+              <SanityImage
+                alt={author.image.alt ?? author.name}
+                className="block !h-full !w-full rounded-full object-cover"
+                height={60}
+                image={author.image}
+                maxSrcSetWidth={60}
+                width={60}
+              />
+            </div>
           ) : (
-            <div className="flex size-10 items-center justify-center rounded-full bg-muted font-medium text-muted-foreground text-sm">
+            <div className="flex size-12 max-h-[60px] max-w-[60px] shrink-0 items-center justify-center rounded-full bg-muted font-medium text-muted-foreground text-sm">
               {author.name
                 .split(" ")
                 .filter(Boolean)

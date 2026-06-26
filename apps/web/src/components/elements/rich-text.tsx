@@ -19,7 +19,7 @@ const components: Partial<PortableTextReactComponents> = {
       const slug = parseChildrenToSlug(value.children);
       return (
         <h2
-          className="mt-5 scroll-m-24 font-serif text-3xl leading-tight first:mt-0"
+          className="mt-4 mb-2 scroll-m-24 font-serif text-3xl leading-tight first:mt-0"
           id={slug}
         >
           {children}

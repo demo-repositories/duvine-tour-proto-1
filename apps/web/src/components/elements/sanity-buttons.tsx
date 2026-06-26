@@ -29,7 +29,7 @@ function SanityButton({
       variant={variant}
       {...props}
       asChild
-      className={cn("rounded-[10px]", className)}
+      className={className}
     >
       <Link
         aria-label={`Navigate to ${text}`}

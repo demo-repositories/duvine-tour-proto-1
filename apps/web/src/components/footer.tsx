@@ -108,7 +108,7 @@ function SocialLinks({ data }: SocialLinksProps) {
 
 export function FooterSkeleton() {
   return (
-    <footer className="mt-16 pb-8">
+    <footer className="mt-16 bg-zinc-900 pb-8 text-zinc-400">
       <div className="mb-10 h-1 w-full bg-[#DBE035]" aria-hidden />
       <section className="container mx-auto px-4 md:px-6">
         <div className="h-[500px] lg:h-auto">
@@ -116,14 +116,14 @@ export function FooterSkeleton() {
             <div className="flex w-full max-w-96 shrink flex-col items-center justify-between gap-6 lg:items-start">
               <div>
                 <span className="flex items-center justify-center gap-4 lg:justify-start">
-                  <div className="h-[40px] w-[80px] animate-pulse rounded bg-muted" />
+                  <div className="h-[40px] w-[80px] animate-pulse bg-zinc-700/70" />
                 </span>
-                <div className="mt-6 h-16 w-full animate-pulse rounded bg-muted" />
+                <div className="mt-6 h-16 w-full animate-pulse bg-zinc-700/60" />
               </div>
               <div className="flex items-center space-x-6">
                 {[1, 2, 3, 4, 5].map((i) => (
                   <div
-                    className="h-6 w-6 animate-pulse rounded bg-muted"
+                    className="h-6 w-6 animate-pulse bg-zinc-700/60"
                     key={i}
                   />
                 ))}
@@ -132,11 +132,11 @@ export function FooterSkeleton() {
             <div className="grid grid-cols-3 gap-6 lg:gap-20">
               {[1, 2, 3].map((col) => (
                 <div key={col}>
-                  <div className="mb-6 h-6 w-24 animate-pulse rounded bg-muted" />
+                  <div className="mb-6 h-6 w-24 animate-pulse bg-zinc-700/70" />
                   <div className="space-y-4">
                     {[1, 2, 3, 4].map((item) => (
                       <div
-                        className="h-4 w-full animate-pulse rounded bg-muted"
+                        className="h-4 w-full animate-pulse bg-zinc-700/50"
                         key={item}
                       />
                     ))}
@@ -145,11 +145,11 @@ export function FooterSkeleton() {
               ))}
             </div>
           </div>
-          <div className="mt-20 flex flex-col justify-between gap-4 border-t pt-8 text-center lg:flex-row lg:items-center lg:text-left">
-            <div className="h-4 w-48 animate-pulse rounded bg-muted" />
+          <div className="mt-20 flex flex-col justify-between gap-4 border-zinc-700 border-t pt-8 text-center lg:flex-row lg:items-center lg:text-left">
+            <div className="h-4 w-48 animate-pulse bg-zinc-700/50" />
             <div className="flex justify-center gap-4 lg:justify-start">
-              <div className="h-4 w-32 animate-pulse rounded bg-muted" />
-              <div className="h-4 w-24 animate-pulse rounded bg-muted" />
+              <div className="h-4 w-32 animate-pulse bg-zinc-700/50" />
+              <div className="h-4 w-24 animate-pulse bg-zinc-700/50" />
             </div>
           </div>
         </div>
@@ -164,18 +164,18 @@ function Footer({ data, settingsData }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-20 pb-8">
+    <footer className="mt-20 bg-zinc-900 pb-8 text-zinc-100">
       <div className="mb-10 h-1 w-full bg-[#DBE035]" aria-hidden />
       <section className="container mx-auto">
         <div className="h-[500px] lg:h-auto">
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-10 px-4 text-center md:px-6 lg:flex-row lg:text-left">
             <div className="flex w-full max-w-96 shrink flex-col items-center justify-between gap-6 md:gap-8 lg:items-start">
               <div>
-                <span className="flex items-center justify-center gap-4 lg:justify-start">
+                <span className="flex items-center justify-center gap-4 [&_img]:invert lg:justify-start">
                   <Logo alt={siteTitle} image={logo} priority />
                 </span>
                 {subtitle && (
-                  <p className="mt-6 text-muted-foreground text-sm dark:text-zinc-400">
+                  <p className="mt-6 text-sm text-zinc-400">
                     {subtitle}
                   </p>
                 )}
@@ -186,12 +186,14 @@ function Footer({ data, settingsData }: FooterProps) {
               <div className="grid grid-cols-3 gap-6 lg:mr-20 lg:gap-28">
                 {columns.map((column, index) => (
                   <div key={`column-${column?._key}-${index}`}>
-                    <h3 className="mb-6 font-semibold">{column?.title}</h3>
+                    <h3 className="mb-6 font-semibold text-zinc-100">
+                      {column?.title}
+                    </h3>
                     {column?.links && column?.links?.length > 0 && (
-                      <ul className="space-y-4 text-muted-foreground text-sm dark:text-zinc-400">
+                      <ul className="space-y-4 text-sm text-zinc-400">
                         {column?.links?.map((link, columnIndex) => (
                           <li
-                            className="font-medium hover:text-primary"
+                            className="font-medium hover:text-[#DBE035]"
                             key={`${link?._key}-${columnIndex}-column-${column?._key}`}
                           >
                             <Link
@@ -214,16 +216,16 @@ function Footer({ data, settingsData }: FooterProps) {
               </div>
             )}
           </div>
-          <div className="mt-20 border-t pt-8">
-            <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 px-4 text-center font-normal text-muted-foreground text-sm md:px-6 lg:flex-row lg:items-center lg:text-left">
+          <div className="mt-20 border-zinc-700 border-t pt-8">
+            <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 px-4 text-center font-normal text-sm text-zinc-400 md:px-6 lg:flex-row lg:items-center lg:text-left">
               <p>
                 © {year} {siteTitle}. All rights reserved.
               </p>
               <ul className="flex justify-center gap-4 lg:justify-start">
-                <li className="hover:text-primary">
+                <li className="hover:text-[#DBE035]">
                   <Link href="/terms">Terms and Conditions</Link>
                 </li>
-                <li className="hover:text-primary">
+                <li className="hover:text-[#DBE035]">
                   <Link href="/privacy">Privacy Policy</Link>
                 </li>
               </ul>
