@@ -64,7 +64,7 @@ export function RelatedTourCard({ tour, className }: RelatedTourCardProps) {
             <Badge className="rounded-md" variant="secondary">
               Related tour
             </Badge>
-            <h2 className="font-semibold text-xl leading-snug group-hover:underline group-hover:decoration-dotted group-hover:underline-offset-4">
+            <h2 className="font-serif text-xl leading-snug group-hover:underline group-hover:decoration-dotted group-hover:underline-offset-4">
               {tour.title}
             </h2>
             {tour.subtitle ? (

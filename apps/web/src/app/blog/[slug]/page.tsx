@@ -27,6 +27,15 @@ const PLACEHOLDER_SLUG = "__placeholder__";
 
 type BlogParams = { slug: string };
 
+type BlogAuthor = {
+  name?: string | null;
+  position?: string | null;
+  image?: {
+    id?: string | null;
+    alt?: string | null;
+  } | null;
+};
+
 export async function generateStaticParams() {
   try {
     const { data: slugs } = await sanityFetchStaticParams({
@@ -138,7 +147,8 @@ function BlogPageContent({
 }: {
   data: NonNullable<Awaited<ReturnType<typeof getCachedBlogPage>>>;
 }) {
-  const { title, description, image, richText } = data ?? {};
+  const { title, description, image, richText, publishedAt } = data ?? {};
+  const author = (data as { authors?: BlogAuthor | null }).authors ?? null;
   const relatedTour =
     (data as { relatedTour?: RelatedTour | null }).relatedTour ?? null;
 
@@ -147,22 +157,14 @@ function BlogPageContent({
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
         <main>
           <ArticleJsonLd article={data} />
+          <BlogHeroImage image={image} title={title} />
           <header className="mb-8">
-            <h1 className="mt-2 font-bold text-4xl">{title}</h1>
+            <h1 className="mt-8 text-balance font-serif text-5xl leading-tight">
+              {title}
+            </h1>
+            <BlogArticleMeta author={author} publishedAt={publishedAt} />
             <p className="mt-4 text-lg text-muted-foreground">{description}</p>
           </header>
-          {image && (
-            <div className="mb-12">
-              <SanityImage
-                alt={title}
-                className="h-auto w-full rounded-lg"
-                height={900}
-                image={image}
-                loading="eager"
-                width={1600}
-              />
-            </div>
-          )}
           {relatedTour ? (
             <RelatedTourCard className="mb-12 lg:hidden" tour={relatedTour} />
           ) : null}
@@ -171,11 +173,96 @@ function BlogPageContent({
 
         <div className="hidden lg:block">
           <div className="sticky top-4 space-y-6 rounded-lg">
-            <RelatedTourCard tour={relatedTour} />
             <TableOfContent richText={richText ?? []} />
+            <RelatedTourCard tour={relatedTour} />
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function BlogHeroImage({
+  image,
+  title,
+}: {
+  image: Parameters<typeof SanityImage>[0]["image"] | null | undefined;
+  title?: string | null;
+}) {
+  return (
+    <div className="mb-10 overflow-hidden rounded-lg bg-muted">
+      {image?.id ? (
+        <SanityImage
+          alt={title ?? "Blog post image"}
+          className="aspect-[16/7] w-full object-cover"
+          height={700}
+          image={image}
+          loading="eager"
+          width={1600}
+        />
+      ) : (
+        <div className="flex aspect-[16/7] w-full items-end bg-stone-100 p-6 text-stone-700">
+          <span className="font-medium text-sm">Featured image</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function BlogArticleMeta({
+  author,
+  publishedAt,
+}: {
+  author?: BlogAuthor | null;
+  publishedAt?: string | null;
+}) {
+  if (!(author?.name || publishedAt)) {
+    return null;
+  }
+
+  const formattedDate = publishedAt
+    ? new Date(`${publishedAt}T00:00:00`).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : null;
+
+  return (
+    <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
+      {author?.name ? (
+        <div className="flex items-center gap-3">
+          {author.image?.id ? (
+            <SanityImage
+              alt={author.image.alt ?? author.name}
+              className="size-10 rounded-full object-cover"
+              height={80}
+              image={author.image}
+              width={80}
+            />
+          ) : (
+            <div className="flex size-10 items-center justify-center rounded-full bg-muted font-medium text-muted-foreground text-sm">
+              {author.name
+                .split(" ")
+                .filter(Boolean)
+                .slice(0, 2)
+                .map((part) => part[0])
+                .join("")}
+            </div>
+          )}
+          <div>
+            <p className="font-medium text-foreground">{author.name}</p>
+            {author.position ? (
+              <p className="text-muted-foreground">{author.position}</p>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+      {formattedDate ? (
+        <time className="text-muted-foreground" dateTime={publishedAt ?? ""}>
+          {formattedDate}
+        </time>
+      ) : null}
     </div>
   );
 }

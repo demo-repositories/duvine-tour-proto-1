@@ -466,7 +466,7 @@ export const TableOfContent: FC<TableOfContentProps> = ({
         <summary
           className={cn(
             "flex cursor-pointer items-center justify-between",
-            "font-semibold text-lg text-zinc-800 dark:text-zinc-200",
+            "font-serif text-lg text-zinc-800 dark:text-zinc-200",
             "hover:text-blue-600 dark:hover:text-blue-400",
             "transition-colors duration-200 focus:outline-none",
             "rounded-sm p-1"
